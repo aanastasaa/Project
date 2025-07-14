@@ -1,0 +1,905 @@
+@font-face {
+    font-family: 'Cuprum';
+    src: url('fonts/cuprum.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Cuprum';
+    src: url('fonts/cuprum-bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+* {
+    font-family: 'Cuprum', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    max-width: 1920px;
+    padding: 25px 240px;
+    margin: 0 auto;
+}
+
+h1, h2, h3, p, textarea, input {
+    margin: 0;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Button styles */
+.button_next {
+    padding: 8px 13px 9px 12px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e65e26;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.button_next:hover {
+    background-color: #f8f8f8;
+}
+
+.arrow_next {
+    padding-right: 25px;
+}
+
+.next-btn__text {
+    color: #e65e26;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Form styles */
+.form_title {
+    font-size: 40px;
+    color: #22387d;
+    font-weight: 700;
+    line-height: 46px;
+    text-align: center;
+}
+
+.form_body {
+    border: 4px solid #22387d;
+    border-radius: 40px;
+    padding: 60px 146px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form_group {
+    width: 100%;
+}
+
+.form_group h2 {
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+.form_group input,
+.form_group textarea {
+    width: 100%;
+    padding: 21px 25px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    transition: border-color 0.3s ease;
+}
+
+.form_group input:focus,
+.form_group textarea:focus {
+    outline: none;
+    border-color: #22387d;
+}
+
+textarea {
+    resize: none;
+    min-height: 120px;
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+}
+
+/* Убирает все возможные скрытые отступы */
+.form_group textarea {
+    margin-bottom: 0;
+    display: block; /* На всякий случай */
+}
+/* Убирает влияние line-height */
+.form_group {
+    line-height: 1;
+}
+
+
+/* Custom select styles */
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.hidden-select {
+    display: none;
+}
+
+.select-styled {
+    padding: 21px 25px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    color: #929292;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-styled.has-selection {
+    color: #333;
+}
+
+.select-styled.active {
+    border-color: #22387d;
+}
+
+.select-arrow {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-styled.active .select-arrow {
+    transform: rotate(180deg);
+}
+
+.select-options {
+    display: none;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.select-options li {
+    padding: 15px 25px;
+    color: #333;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.select-options li:hover,
+.select-options li.selected {
+    background: #22387d;
+    color: #fff;
+}
+
+.select-options li:last-child {
+    border-bottom: none;
+}
+
+/* Date and time styles */
+.date-time-container {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+}
+
+.form-group {
+    flex: 1;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    color: #000;
+}
+
+input[type="date"],
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 21px 25px;
+    font-size: 24px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    line-height: 28px;
+}
+
+/* Checkbox dropdown styles */
+.checkbox-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.checkbox-dropdown-toggle {
+    padding: 21px 25px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    color: #929292;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkbox-dropdown-toggle.active {
+    border-color: #22387d;
+    color: #333;
+}
+
+.checkbox-dropdown-arrow {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+}
+
+.checkbox-dropdown-toggle.active .checkbox-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.checkbox-dropdown-menu {
+    display: none;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.checkbox-dropdown-menu.show {
+    display: block;
+}
+
+.checkbox-dropdown-item {
+    padding: 15px 25px;
+    color: #333;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.checkbox-dropdown-item:hover,
+.checkbox-dropdown-item.selected {
+    background: #22387d;
+    color: #fff;
+}
+
+.checkbox-dropdown-item:hover label,
+.checkbox-dropdown-item.selected label {
+    color: #fff;
+}
+
+.checkbox-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.checkbox-dropdown-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-dropdown-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    padding-left: 35px;
+}
+
+.checkbox-dropdown-item label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #929292;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.checkbox-dropdown-item.selected label:before {
+    border-color: #fff;
+    background-color: #22387d;
+}
+
+.checkbox-dropdown-item label:after {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.checkbox-dropdown-item.selected label:after {
+    opacity: 1;
+}
+
+.selected-text {
+    flex-grow: 1;
+}
+
+.selected-count {
+    font-size: 16px;
+    color: #22387d;
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+/* File upload styles */
+.file-upload-container {
+    margin: 0 auto;
+}
+
+.upload-area {
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    padding: 21px 25px;
+    width: 100%;
+    color: #929292;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upload-area:hover {
+    border-color: #666;
+    color: #666;
+}
+
+.upload-area.active {
+    border-color: #22387d;
+    color: #22387d;
+}
+
+.upload-area.error {
+    border-color: #f44336;
+    color: #f44336;
+    animation: shake 0.5s;
+}
+
+.file-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    margin-left: 15px;
+    transition: transform 0.3s;
+}
+
+.upload-area.active .file-icon {
+    transform: rotate(45deg);
+}
+
+.file-input {
+    display: none;
+}
+
+.files-list {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeIn 0.3s;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9f9f9;
+    border-radius: 35px;
+    padding: 15px 25px;
+}
+
+.file-name {
+    font-size: 18px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 40px);
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #f44336;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-left: 10px;
+    transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+}
+
+.delete-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.file-type-icon {
+    margin-right: 10px;
+    color: #22387d;
+    font-size: 20px;
+}
+
+.status-text {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+}
+
+.error-text {
+    color: #f44336;
+    text-align: center;
+    font-size: 16px;
+    display: none;
+}
+
+/* Next block styles */
+.next-block {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.next-block.visible {
+    opacity: 1;
+    max-height: 500px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    padding: 25px;
+}
+
+.next-block.visible h3 {
+    font-size: 24px;
+}
+
+.form-block {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.form-block input {
+    padding: 5px 25px;
+    border: 2px solid #929292;
+    border-radius: 35px;
+    background: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    width: 100px;
+    text-align: center;
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 22px;
+    text-align: center;
+    animation: fadeInScale 0.3s ease-out;
+    transform-origin: top center;
+    box-sizing: border-box;
+}
+
+.popup.error {
+    background-color: #ffebee;
+    border: 2px solid #ef5350;
+    color: #d32f2f;
+}
+
+.popup.success {
+    background-color: #e8f5e9;
+    border: 2px solid #66bb6a;
+    color: #2e7d32;
+}
+
+.popup.info {
+    background-color: #e3f2fd;
+    border: 2px solid #42a5f5;
+    color: #1565c0;
+}
+
+.error-message {
+
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+    color: #ef5350;
+    display: none;
+    padding: 5px 10px;
+    background-color: #ffebee;
+    border-radius: 35px;
+    z-index: 1;
+    margin-top: 7px;
+    padding-top: 0;
+    display: block;
+}
+
+.form_group, .form-group, .custom-select, .checkbox-dropdown {
+    position: relative;
+}
+
+/* Стили для тегов множественного выбора */
+.multi-select-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.multi-select-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #22387d;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.multi-select-tag button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 6px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.multi-select-tag button:hover {
+    color: #e65e26;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20%, 60% {
+        transform: translateX(-5px);
+    }
+    40%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .container {
+        padding: 25px 120px;
+    }
+    
+    .form_body {
+        padding: 40px 80px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 25px 60px;
+    }
+    
+    .form_body {
+        padding: 30px 40px;
+    }
+    
+    .form_title {
+        font-size: 32px;
+        line-height: 38px;
+    }
+    
+    .form_group input,
+    .form_group textarea,
+    .select-styled,
+    input[type="date"],
+    input[type="datetime-local"] {
+        font-size: 20px;
+        padding: 18px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .form_body {
+        padding: 25px;
+        border-width: 2px;
+    }
+    
+    .form_title {
+        font-size: 28px;
+        line-height: 32px;
+    }
+    
+    .date-time-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form_group h2 {
+        font-size: 18px;
+    }
+    
+    .send_form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .form_body {
+        padding: 20px 15px;
+    }
+    
+    .form_title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    
+    .form_group input,
+    .form_group textarea,
+    .select-styled,
+    input[type="date"],
+    input[type="datetime-local"] {
+        font-size: 18px;
+        padding: 15px;
+    }
+    
+    .checkbox-dropdown-item label {
+        font-size: 16px;
+    }
+}
+
+
+
+
+/* Основной фикс для технической поддержки */
+#tech-support-select {
+    margin-bottom: 0;
+    position: relative; /* Для корректного позиционирования дочерних absolute */
+}
+
+#tech-extra-fields {
+    top: 100%; /* Позиционируем прямо под select */
+    margin-top: -1px; /* Компенсируем границу */
+    border-radius: 0 0 35px 35px; /* Скругляем только нижние углы */
+}
+
+/* Жесткий сброс отступов для сообщения об ошибке */
+#error_tech_support.error-message {
+    margin-top: 7px;
+    padding-top: 0;
+    display: block;
+}
+
+/* Дополнительные гарантированные исправления */
+.form_group {
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.form_group h2 {
+    margin-bottom: 7px; /* Контролируемый отступ для заголовка */
+}
+
+
+/* Стили для кнопки отправки формы */
+.button_send {
+    display: flex;
+    justify-content: center;
+}
+
+.send_form {
+    padding: 15px 58px 17px 58px;
+    background: #22387d;
+    border-radius: 15px;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(34, 56, 125, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.send_form:hover {
+    background: #e65e26;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(230, 94, 38, 0.3);
+}
+
+.send_form:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(34, 56, 125, 0.2);
+}
+
+.send_form:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(34, 56, 125, 0.3);
+}
+
+/* Анимация при наведении */
+.send_form::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.send_form:hover::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .send_form {
+        padding: 15px 30px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .send_form {
+        padding: 12px 24px;
+        font-size: 18px;
+        width: 100%;
+    }
+}
+

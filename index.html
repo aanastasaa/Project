@@ -1,114 +1,242 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новости</title>
-    <link rel="stylesheet" href="News.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация мероприятия</title>
+    <link rel="stylesheet" href="form_event.css">
+    <script src="forms.js"></script>
 </head>
+
 <body>
-<main class="main">
-    <section class="management">
-        <div class="container">
-            <button class="button_next">
-                <img class="arrow_next" src="images/arrow_next.svg">
-                <span class="next-btn__text">Назад</span>
-            </button>
-        </div>
-    </section>
-    <section class="news">
-        <div class="grey_background">
+    <main class="main">
+        <section class="management">
             <div class="container">
-                <div class="news_header">
-                    <h1 class="news_title">НОВОСТИ</h1>
-                    <button class="suggest_news">
-                        <span class="suggest_news_text">Предложить новость</span>
-                    </button>
+                <button class="button_next">
+                    <img class="arrow_next" src="images/arrow_next.svg">
+                    <span class="next-btn__text">Назад</span>
+                </button>
+            </div>
+        </section>
+        <section class="form">
+            <div class="container">
+                <div class="form_title">
+                    <h1>РЕГИСТРАЦИЯ НА ПРОВЕДЕНИЕ МЕРОПРИЯТИЯ</h1>
                 </div>
-                <div class="news_inner">
-                    <div class="news_item">
-                            <img class="news_item_foto" src="images/foto_news.jpg">
-                            <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                            <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные... </p>
-                            <p class="news_item_data">26.06.2025</p>
+
+                <div class="form_body">
+                    <div class="form_group">
+                        <h2>Название организации</h2>
+                        <input type="text" id="name_organization" name="name_organization" class="name_organization"
+                            placeholder="Название организации" required>
+                        <div id="error_name_organization" class="error-message" style="color: red; display: none;">
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div id="popup_name_organization" class="popup"></div>
+                    <div class="form_group">
+                        <h2>Номер телефона организации</h2>
+                        <input type="text" id="phone_number_organization" name="phone_number_organization"
+                            placeholder="Номер телефона организации" required>
+                        <div id="error_phone_organization" class="error-message" style="color: red; display: none;">
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Электронная почта</h2>
+                        <input type="text" id="email_organization" name="email_organization"
+                            placeholder="Электронная почта" required>
+                        <div id="error_email_organization" class="error-message" style="color: red; display: none;">
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Ответственное лицо</h2>
+                        <input type="text" id="responsible_person" name="responsible_person"
+                            placeholder="Ответсвенное лицо" required>
+                        <div id="error_responsible_person" class="error-message" style="color: red; display: none;">
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Номер тел. ответственного лица</h2>
+                        <input type="text" id="phone_responsible_person" name="phone_responsible_person"
+                            placeholder="Номер тел. ответственного лица" required>
+                        <div id="error_phone_responsible" class="error-message" style="color: red; display: none;">
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Реквизиты договора</h2>
+                        <input type="text" id="contract_details" name="contract_details"
+                            placeholder="Реквизиты договора" required>
+                        <div id="error_contract_details" class="error-message" style="color: red; display: none;"></div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Выберите формат проведения мероприятия</h2>
+                        <div class="custom-select" id="event-type-select">
+                            <select class="hidden-select" id="event-type" required>
+                                <option value="">Формат проведения мероприятия</option>
+                                <option value="meeting">Совещание</option>
+                                <option value="concert">Концерт</option>
+                                <option value="seminar">Семинар</option>
+                                <option value="conference">Конференция</option>
+                                <option value="training">Тренинг</option>
+                            </select>
+                            <div class="select-styled">
+                                <p>Формат проведения мероприятия</p>
+                                <img class="select-arrow" src="images/arrow.png" alt="▼">
+                            </div>
+                            <ul class="select-options">
+                                <li data-value="meeting">Совещание</li>
+                                <li data-value="concert">Концерт</li>
+                                <li data-value="seminar">Семинар</li>
+                                <li data-value="conference">Конференция</li>
+                                <li data-value="training">Тренинг</li>
+                            </ul>
+                        </div>
+                        <div id="error_event_type" class="error-message" style="color: red; display: none;"></div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="date-time-container">
+                        <div class="form-group">
+                            <label for="start-datetime">Дата и время начала мероприятия:</label>
+                            <input type="datetime-local" id="start-datetime" name="start-datetime" required>
+                            <div id="error_start_datetime" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end-datetime">Дата и время окончания мероприятия:</label>
+                            <input type="datetime-local" id="end-datetime" name="end-datetime" required>
+                            <div id="error_end_datetime" class="error-message" style="color: red; display: none;"></div>
+                        </div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Наименование (тема) мероприятия</h2>
+                        <input type="text" id="name_event" name="name_event"
+                            placeholder="Наименование (тема) мероприятия" required>
+                        <div id="error_name_event" class="error-message" style="color: red; display: none;"></div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Краткое описание мероприятия</h2>
+                        <textarea id="myTextarea" required></textarea>
+                        <div id="error_description" class="error-message" style="color: red; display: none;"></div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="form_group">
+                        <h2>Количество участников</h2>
+                        <input type="text" id="namber_people" name="namber_people"
+                            placeholder="Количество участников" required>
+                        <div id="error_namber_people" class="error-message" style="color: red; display: none;"></div>
                     </div>
-                    <div class="news_item">
-                        <img class="news_item_foto" src="images/foto_news.jpg">
-                        <h3 class="news_item_title">В школьном лагере «Улыбка» г. Скопина прошла викторина...</h3>
-                        <p class="news_item_text">Провела викторину председатель департамента по инновациям и социальным технологиям Межнациональной Ассоциации «Мы разные...</p>
-                        <p class="news_item_data">26.06.2025</p>
+                    <div class="date-time-container">
+                        <div class="form-group">
+                            <label for="start-datetime-rehearsal">Дата и время начала репетиции:</label>
+                            <input type="datetime-local" id="start-datetime-rehearsal" name="start-datetime-rehearsal" required>
+                            <div id="error_start_datetime-rehearsal" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-datetime-rehearsal">Дата и время окончания репетиции:</label>
+                            <input type="datetime-local" id="end-datetime-rehearsal" name="end-datetime-rehearsal" required>
+                            <div id="error_end_datetime-rehearsal" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="form_group">
+                        <h2>Техническая поддержка</h2>
+                        <div class="custom-select" id="tech-support-select">
+                            <select class="hidden-select" id="technical_support" required>
+                                <option value="">-- Выберите формат --</option>
+                                <option value="wardrobe">гардероб</option>
+                                <option value="sound_equipment">звуковое оборудование</option>
+                                <option value="stage_light">сценический свет</option>
+                                <option value="scene">сцена</option>
+                                <option value="projection_equipment">проекционное оборудование</option>
+                            </select>
+                            <div class="select-styled">
+                                <p>Выберите формат</p>
+                                <img class="select-arrow" src="images/arrow.png" alt="▼">
+                            </div>
+                            <ul class="select-options">
+                                <li data-value="wardrobe">гардероб</li>
+                                <li data-value="sound_equipment">звуковое оборудование</li>
+                                <li data-value="stage_light">сценический свет</li>
+                                <li data-value="scene">сцена</li>
+                                <li data-value="projection_equipment">проекционное оборудование</li>
+                                <li data-value="laptop">ноутбук</li>
+                                <li data-value="microphone">микрофон общий</li>
+                                <li data-value="radio_microphone">радиомикрофон</li>
+                                <li data-value="other">другое</li>
+                            </ul>
+                            <div id="tech-extra-fields" class="next-block"></div>
+                        </div>
+                        <div id="error_tech_support" class="error-message" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form_group">
+                        <h2>Выберите информацию об использовании фото и видеосъёмки</h2>
+                        <div class="checkbox-dropdown">
+                            <div class="checkbox-dropdown-toggle">
+                                <span class="selected-text">Выберите варианты</span>
+                                <span class="selected-count"></span>
+                                <img class="checkbox-dropdown-arrow" src="images/arrow.png">
+                            </div>
+                            <ul class="checkbox-dropdown-menu">
+                                <li class="checkbox-dropdown-item">
+                                    <input type="checkbox" id="without_foto_video" name="information_foto_video"
+                                        value="without_foto_video">
+                                    <label for="without_foto_video">на мероприятии не предполагается фото и
+                                        видеосъёмка</label>
+                                </li>
+                                <li class="checkbox-dropdown-item">
+                                    <input type="checkbox" id="with_foto_video" name="information_foto_video"
+                                        value="with_foto_video">
+                                    <label for="with_foto_video">на мероприятии предполагается фото и
+                                        видеосъёмка</label>
+                                </li>
+                                <li class="checkbox-dropdown-item">
+                                    <input type="checkbox" id="media_invited" name="information_foto_video"
+                                        value="media_invited">
+                                    <label for="media_invited">на мероприятие приглашены СМИ</label>
+                                </li>
+                            </ul>
+                            <div id="error_photo_video" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="form_group">
+                        <h2>В случае проведения мероприятия совместно с другими организациями, указать их наименования
+                        </h2>
+                        <textarea id="Textarea"></textarea>
+                        <div id="error_organizations" class="error-message" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form_group">
+                        <h2>Сценарий (план) проведения мероприятия</h2>
+                        <div class="file-upload-container">
+                            <input type="file" id="fileInput" class="file-input" accept=".doc,.docx,.pdf,.txt" multiple>
+
+                            <label for="fileInput" class="upload-area" id="uploadArea">
+                                <span id="uploadText">Загрузить сценарий (макс. 20)</span>
+                                <svg class="file-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                                </svg>
+                            </label>
+
+                            <div class="status-text" id="statusText"></div>
+                            <div class="error-text" id="errorText">Максимальное количество файлов - 20!</div>
+
+                            <div class="files-list" id="filesList">
+                                <!-- Список файлов будет добавляться здесь -->
+                            </div>
+                        </div>
+                        <div id="error_files" class="error-message" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="popup-container">
+                        <div id="popup" class="popup"></div>
+                    </div>
+
+                    <div class="button_send">
+                        <button class="send_form">
+                            <span class="send_form_text">Отправить заявку</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="news_btn_more">
-            <button class="more-btn">
-                <span class="more-btn_text">Показать ещё</span>
-            </button>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 </body>
+
 </html>
