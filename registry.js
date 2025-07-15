@@ -1,4 +1,3 @@
-<script>
 document.getElementById('searchForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Отменяем стандартную отправку формы
     
@@ -19,4 +18,3 @@ function filterOrganizations(query) {
         org.style.display = name.includes(lowerQuery) ? '' : 'none';
     });
 }
-</script>

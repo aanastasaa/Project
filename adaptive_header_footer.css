@@ -1,0 +1,842 @@
+@media screen and (max-width: 1921px) {
+    .cards {
+        max-width: 1300px;
+    }
+
+    .card {
+        padding: 20px;
+        max-width: 400px;
+    }
+
+    .card-img {
+        height: 280px;
+    }
+
+    .card-date {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1770px) {
+    .login-button {
+        width: 140px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .logo {
+        height: 120px;
+    }
+
+    .menu {
+        gap: 35px;
+    }
+
+    .dropdown-button {
+        font-size: 20px;
+    }
+
+    .dropdown-content a {
+        font-size: 18px;
+    }
+
+    .card {
+        max-width: 380px;
+    }
+
+    .card-img {
+        height: 260px;
+    }
+
+    .button-watch-more {
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .footer-main-text, .footer-title-text {
+        font-size: 20px;
+    }
+
+    .footer-text {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1670px) {
+    .card-title {
+        margin: 15px 0;
+    }
+
+    .card {
+        max-width: 340px;
+    }
+}
+
+@media screen and (max-width: 1657px) {
+    .header .container {
+        padding: 25px 180px;
+    }
+
+    .menu-item {
+        font-size: 18px;
+    }
+
+    .login-button {
+        font-size: 18px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 180px;
+    }
+
+    .line span {
+        font-size: 36px;
+    }
+
+    .dropdown-grid .container {
+        padding: 0 180px;
+    }
+
+    .dropdown-button {
+        font-size: 18px;
+        border-radius: 15px;
+    }
+
+    .dropdown-content a {
+        font-size: 16px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 60px 180px;
+    }
+
+    .news-title, .announcements-title {
+        font-size: 36px;
+    }
+
+    .card-img {
+        height: 200px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        margin: 15px 0;
+    }
+
+    .card-text,
+    .card-date {
+        font-size: 16px;
+    }
+
+    .card-date {
+        margin-top: 15px;
+    }
+
+    .button-watch-more {
+        font-size: 18px;
+    }
+
+    .footer {
+        padding: 60px 180px;
+    }
+
+    .footer-right {
+        max-width: 700px;
+    }
+
+    .footer-main-text, .footer-title-text {
+        font-size: 18px;
+    }
+
+    .footer-text {
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width: 1445px) {
+    .header .container {
+        padding: 25px 120px;
+    }
+
+    .logo {
+        height: 100px;
+    }
+
+    .login-button {
+        width: 100px;
+        height: 50px;
+    }
+
+    .menu {
+        gap: 35px;
+    }
+
+    .search-input {
+        width: 220px;
+        padding: 12px 15px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 120px;
+    }
+
+    .line span {
+        font-size: 24px;
+    }
+
+    .dropdown-grid .container {
+        padding: 0 120px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 60px 120px;
+    }
+
+    .news-title, .announcements-title {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 15px;
+        max-width: 320px;
+    }
+
+    .card-img {
+        height: 180px;
+    }
+
+    .button-watch-more {
+        width: 260px;
+        font-size: 18px;
+    }
+
+    .footer {
+        padding: 60px 120px;
+    }
+
+    .footer-right {
+        max-width: 600px;
+    }
+
+    .footer-left {
+        max-width: 341px;
+    }
+
+    .footer-main-text {
+        margin-bottom: 15px;
+    }
+
+    .footer-main-text.margin-text {
+        margin-top: 25px;
+    }
+
+    .map-wrapper {
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 1349px) {
+    .header .container {
+        padding: 25px 80px;
+    }
+
+    .menu-item {
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 16px;
+    }
+
+    .logo {
+        height: 80px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 80px;
+    }
+
+    .line span {
+        font-size: 30px;
+    }
+
+    .dropdown-grid .container {
+        padding: 0 80px;
+    }
+
+    .dropdown-button {
+        font-size: 16px;
+    }
+
+    .dropdown-content a {
+        font-size: 14px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 60px 80px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-text,
+    .card-date {
+        font-size: 14px;
+    }
+
+    .button-watch-more {
+        font-size: 16px;
+    }
+
+    .footer {
+        padding: 60px 80px;
+    }
+
+    .footer-right {
+        max-width: 580px;
+    }
+
+    .footer-main-text, .footer-title-text {
+        font-size: 16px;
+    }
+
+    .footer-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1229px) {
+    .login-button {
+        width: 80px;
+        height: 40px;
+        border-radius: 8px;
+    }
+
+    .menu {
+        gap: 25px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+    }
+
+    .search-input {
+        padding: 10px 15px;
+        width: 180px;
+    }
+
+    .search-input::placeholder {
+        font-size: 18px;
+    }
+
+    .search-icon {
+        width: 18px;
+    }
+
+    .running-line {
+        margin: 60px 0;
+    }
+
+    .dropdown-button {
+        padding: 28px;
+    }
+
+    .news-section, .announcements-section {
+        margin-top: 40px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 40px 80px;
+    }
+
+    .news-title, .announcements-title {
+        margin-bottom: 40px;
+    }
+
+    .cards {
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .card {
+        padding: 15px;
+        max-width: 400px;
+    }
+
+    .card-img {
+        height: 240px;
+    }
+
+    .card-date {
+        text-align: center;
+    }
+
+    .button-container {
+        margin-top: 40px;
+    }
+
+    .button-watch-more {
+        padding: 12px 20px;
+    }
+
+    .footer {
+        margin-top: 60px;
+        padding: 40px 80px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .header .container {
+        padding: 20px 60px;
+    }
+
+    .login-button {
+        width: 80px;
+        height: 40px;
+    }
+
+    .menu {
+        gap: 20px;
+    }
+
+    .search-input {
+        padding: 6px 10px;
+        width: 150px;
+    }
+
+    .search-input::placeholder {
+        font-size: 12px;
+    }
+
+    .search-icon {
+        width: 10px;
+        right: 10px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 60px;
+    }
+
+    .dropdown-grid .container {
+        padding: 0 60px;
+    }
+
+    .arrow-icon {
+        width: 25px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 40px 60px;
+    }
+
+    .card {
+        padding: 15px;
+        max-width: 300px;
+    }
+
+    .card-img {
+        height: 180px;
+    }
+
+    .footer {
+        padding: 40px 60px;
+    }
+
+    .footer .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .footer-left {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .footer-right {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .footer-left ul {
+        columns: 2;
+        column-gap: 40px;
+        padding: 0;
+    }
+
+    .footer-left ul li {
+        break-inside: avoid;
+        margin-bottom: 8px;
+    }
+
+    .footer-left ul li a {
+        display: inline-block;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.4;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .login-button {
+        width: 70px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .logo {
+        height: 70px;
+    }
+
+    .search-input {
+        padding: 6px 8px;
+        width: 120px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .line span {
+        font-size: 24px;
+    }
+
+    .dropdown-button {
+        font-size: 14px;
+    }
+
+    .button-watch-more {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header .container {
+        padding: 15px 40px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .login-button {
+        width: 65px;
+        height: 34px;
+        line-height: 20px;
+        font-size: 12px;
+    }
+
+
+    .menu {
+        gap: 12px;
+    }
+
+    .menu-item {
+        font-size: 12px;
+    }
+
+    .search-input {
+        padding: 4px 8px;
+        width: 100px;
+    }
+
+    .search-icon {
+        display: none;
+    }
+
+    .search-input::placeholder {
+        font-size: 12px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 40px;
+    }
+
+    .dropdown-grid .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 40px;
+    }
+
+    .dropdown-button {
+        padding: 24px;
+    }
+
+    .dropdown-content a {
+        padding: 20px;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .card {
+        padding: 20px;
+        max-width: 400px;
+    }
+
+    .card-img {
+        height: 240px;
+    }
+
+    .footer {
+        padding: 40px 40px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .search-input {
+        display: none;
+    }
+
+    .dropdown-button {
+        padding: 22px;
+    }
+
+    .footer-left ul {
+        columns: 1;
+    }
+
+    .toggle-content {
+        display: none;
+    }
+
+    .toggle-header {
+        cursor: pointer;
+        position: relative;
+    }
+
+    .toggle-header::after {
+        content: "▼";
+        position: absolute;
+        right: 0;
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-header.open::after {
+        transform: rotate(180deg);
+    }
+
+    .toggle-content.open {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .footer-right {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .info-block {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .info-left,
+    .center-block,
+    .info-right {
+        width: 100%;
+    }
+
+    .center-block {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .map-wrapper {
+        width: 100%;
+        height: 200px;
+    }
+
+    .social-icons svg {
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+    }
+
+    .card {
+        padding: 15px;
+        max-width: 350px;
+    }
+
+    .card-img {
+        height: 180px;
+    }
+
+    .button-watch-more {
+        padding: 10px 15px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    .header .container {
+        padding: 15px 25px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        top: 0;
+        left: 0;
+        background: #000000c9;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 auto;
+    }
+
+    .menu-item {
+        margin: 20px 0;
+    }
+
+    .burger {
+        order: 2;
+        display: block;
+    }
+
+    .burger svg {
+        width: 26px;
+        height: 26px;
+        fill: #22387D;
+        margin-right: 20px;
+    }
+
+    .menu.open {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 20;
+    }
+
+    .menu.open .menu-item {
+        color: #ffffff;
+        font-size: 20px;
+    }
+
+    .menu .close {
+        display: block;
+        width: 24px;
+        height: 24px;
+        fill: #ffffff;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    .carousel-wrapper .container {
+        padding: 0 25px;
+    }
+
+    .dropdown-grid .container {
+        padding: 0 25px;
+    }
+
+    .news-section .container, .announcements-section .container {
+        padding: 40px 25px;
+    }
+
+    .card {
+        padding: 10px;
+        max-width: 270px;
+        border-radius: 25px;
+    }
+
+    .card-img {
+        height: 150px;
+        border-radius: 25px;
+    }
+
+    .card-title {
+        margin: 10px 0;
+    }
+
+    .card-date {
+        margin-top: 10px;
+    }
+
+    .button-watch-more {
+        border-radius: 10px;
+        padding: 8px 15px;
+    }
+
+    .map-wrapper {
+        width: 100%;
+        height: 150px;
+    }
+
+    .footer {
+        padding: 40px 25px;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .map-wrapper {
+        width: 100%;
+        height: 100px;
+    }
+
+    .slick-carousel img {
+        width: 100%;
+        height: 150px;
+        border-radius: 10px;
+    }
+
+    .running-line {
+        padding: 15px 0;
+    }
+
+    .line span {
+        font-size: 20px;
+    }
+
+    .dropdown-button {
+        padding: 20px;
+        border-radius: 15px;
+        gap: 15px;
+        text-align: left;
+    }
+
+    .arrow-icon {
+        width: 15px;
+        right: 15px;
+    }
+
+    .card {
+        border-radius: 20px;
+    }
+
+    .card-img {
+        border-radius: 20px;
+    }
+
+    .button-watch-more {
+        padding: 6px 10px;
+        width: 180px;
+    }
+
+    .button-watch-more .button-watch-more-arrow {
+        margin-left: 10px;
+        width: 18px;
+    }
+}
+
+@media (max-width: 355px) {
+
+}

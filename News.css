@@ -257,6 +257,8 @@ img{
     }
     .news_item {
         padding: 15px;
+        max-width: 350px;
+        margin: 0 auto;
     }
     .news_item_foto {
         height: 200px;

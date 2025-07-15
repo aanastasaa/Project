@@ -60,8 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     select.querySelector(`.select-options li[data-value="${opt}"]`).textContent,
                                     opt
                                 ));
-                            }
-                            )
+                            });
                         }
 
                         // Обновляем теги
@@ -71,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         showTechExtraFields(selectedOptions);
 
                         // Скрываем ошибку при выборе
-                        hideSelectError(hiddenSelect, document.getElementById('error_tech_support'));
+                        const errorElement = document.getElementById('error_tech_support');
+                        if (errorElement) {
+                            hideSelectError(hiddenSelect, errorElement);
+                        }
                     } else {
                         // Для других select оставляем одиночный выбор
                         select.querySelectorAll('.select-options li').forEach(li => {
@@ -85,7 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         hiddenSelect.value = value;
 
                         // Скрываем ошибку при выборе
-                        hideSelectError(hiddenSelect, document.getElementById('error_' + hiddenSelect.id.replace(/-/g, '_')));
+                        const errorElement = document.getElementById('error_' + hiddenSelect.id.replace(/-/g, '_'));
+                        if (errorElement) {
+                            hideSelectError(hiddenSelect, errorElement);
+                        }
                     }
                 });
             });
@@ -132,13 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // Обновляем дополнительные поля
                         showTechExtraFields(newSelectedValues);
-
-                        // Скрываем/показываем ошибку в зависимости от выбора
-                        if (newSelectedValues.length === 0) {
-                            showSelectError(hiddenSelect, document.getElementById('error_tech_support'), 'Выберите техническую поддержку');
-                        } else {
-                            hideSelectError(hiddenSelect, document.getElementById('error_tech_support'));
-                        }
                     });
                 });
             }
@@ -240,63 +238,45 @@ document.addEventListener('DOMContentLoaded', function () {
             const items = dropdown.querySelectorAll('.checkbox-dropdown-item');
             const selectedText = dropdown.querySelector('.selected-text');
             const selectedCount = dropdown.querySelector('.selected-count');
-            const popup = document.createElement('div');
-            popup.className = 'popup error';
-            popup.style.display = 'none';
-            dropdown.appendChild(popup);
+            const checkboxError = document.getElementById('error_photo_video');
 
             // Обработчик клика по toggle
             toggle.addEventListener('click', function (e) {
                 e.stopPropagation();
+                const isActive = menu.classList.contains('show');
+
+                // Закрываем все другие меню
                 document.querySelectorAll('.checkbox-dropdown-menu').forEach(m => {
                     if (m !== menu) m.classList.remove('show');
                 });
-                menu.classList.toggle('show');
-                toggle.classList.toggle('active');
+
+                // Переключаем текущее меню
+                menu.classList.toggle('show', !isActive);
+                toggle.classList.toggle('active', !isActive);
+
+                // Сбрасываем ошибку при открытии меню
+                if (!isActive) {
+                    toggle.style.borderColor = '';
+                    if (checkboxError) {
+                        checkboxError.style.display = 'none';
+                    }
+                }
             });
 
             // Обработчики для элементов меню
             items.forEach(item => {
-                const checkbox = item.querySelector('input[type="checkbox"]');
-
                 item.addEventListener('click', function (e) {
                     e.stopPropagation();
-
+                    const checkbox = item.querySelector('input[type="checkbox"]');
                     const value = checkbox.value;
                     const isChecked = !checkbox.checked;
-                    const withoutChecked = dropdown.querySelector('#without_foto_video').checked;
-                    const withChecked = dropdown.querySelector('#with_foto_video').checked;
-                    const mediaChecked = dropdown.querySelector('#media_invited').checked;
 
                     // Проверка условий
                     let isValid = true;
-
-                    if (value === 'without_foto_video' && isChecked && (withChecked || mediaChecked)) {
-                        isValid = false;
-                    }
-                    else if ((value === 'with_foto_video' || value === 'media_invited') && withoutChecked) {
-                        isValid = false;
-                    }
-                    else if ((withChecked && mediaChecked && isChecked && value !== 'without_foto_video') ||
-                        (withoutChecked && isChecked && value !== 'without_foto_video')) {
-                        isValid = false;
-                    }
-
-                    if (!isValid) {
-                        popup.textContent = 'Ошибка: Невозможно выбрать эти варианты вместе!';
-                        popup.style.display = 'block';
-
-                        setTimeout(() => {
-                            popup.style.display = 'none';
-                        }, 3000);
-
-                        return;
-                    }
-
-                    checkbox.checked = isChecked;
-                    item.classList.toggle('selected', isChecked);
+                    let errorMessage = '';
 
                     if (value === 'without_foto_video' && isChecked) {
+                        // Если выбрано "не предполагается", снимаем другие выборы
                         items.forEach(otherItem => {
                             if (otherItem !== item) {
                                 const otherCheckbox = otherItem.querySelector('input[type="checkbox"]');
@@ -304,15 +284,33 @@ document.addEventListener('DOMContentLoaded', function () {
                                 otherItem.classList.remove('selected');
                             }
                         });
+                    } else if (isChecked && dropdown.querySelector('#without_foto_video').checked) {
+                        // Если уже выбрано "не предполагается", запрещаем другие выборы
+                        isValid = false;
+                        errorMessage = 'Нельзя выбрать другие варианты вместе с "не предполагается фото/видеосъемка"';
+                    }
+
+                    if (!isValid) {
+                        toggle.style.borderColor = '#ef5350';
+                        if (checkboxError) {
+                            checkboxError.textContent = errorMessage;
+                            checkboxError.style.display = 'block';
+                        }
+                        return;
+                    }
+
+                    // Применяем изменения
+                    checkbox.checked = isChecked;
+                    item.classList.toggle('selected', isChecked);
+
+                    // Сбрасываем ошибку
+                    toggle.style.borderColor = '';
+                    if (checkboxError) {
+                        checkboxError.style.display = 'none';
                     }
 
                     updateSelectedText();
-
-                    // Скрываем ошибку при выборе
-                    hideCheckboxError(document.getElementById('error_photo_video'));
                 });
-
-                if (checkbox.checked) item.classList.add('selected');
             });
 
             function updateSelectedText() {
@@ -323,19 +321,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     selectedText.textContent = 'Выберите варианты';
                     selectedCount.textContent = '';
                 } else if (count === 1) {
-                    selectedText.textContent = selected[0].querySelector('label').textContent;
-                    selectedCount.textContent = '';
+                    selectedText.textContent = 'Выбран вариант';
+                    selectedCount.textContent = count;
                 } else {
                     selectedText.textContent = 'Выбрано несколько вариантов';
                     selectedCount.textContent = count;
                 }
             }
 
+            // Закрытие при клике вне меню
             document.addEventListener('click', function () {
                 menu.classList.remove('show');
                 toggle.classList.remove('active');
             });
 
+            // Инициализация текста
             updateSelectedText();
         });
     }
@@ -372,7 +372,10 @@ document.addEventListener('DOMContentLoaded', function () {
             updateStatusText();
 
             // Скрываем ошибку при загрузке файлов
-            hideFileError(document.getElementById('error_files'));
+            const fileError = document.getElementById('error_files');
+            if (fileError) {
+                hideFileError(fileError);
+            }
         });
     }
 
@@ -422,8 +425,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     uploadArea.classList.remove('active');
 
                     // Показываем ошибку, если файлов нет и это обязательное поле
-                    if (document.getElementById('error_files').style.display === 'block') {
-                        showFileError(document.getElementById('error_files'), 'Необходимо загрузить сценарий мероприятия');
+                    const fileError = document.getElementById('error_files');
+                    if (fileError && fileError.style.display === 'block') {
+                        showFileError(fileError, 'Необходимо загрузить сценарий мероприятия');
                     }
                 }
             });
@@ -441,12 +445,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateStatusText() {
         uploadText.textContent = currentFiles.length ?
-            `Добавлено ${currentFiles.length} файлов` :
+            `Сценарий` :
             'Загрузить сценарий (макс. 20)';
-
-        statusText.textContent = currentFiles.length ?
-            `${currentFiles.length} файл(ов) готово к загрузке` :
-            '';
     }
 
     function getFileIcon(filename) {
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Скрываем все предыдущие сообщения об ошибках
         hideAllErrorMessages();
-        popup.style.display = 'none';
+        if (popup) popup.style.display = 'none';
 
         // 1. Проверка текстовых полей
         const requiredFields = [
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const element = document.getElementById(field.id);
             const errorElement = document.getElementById(field.errorId);
 
-            if (!element.value.trim()) {
+            if (!element || !element.value.trim()) {
                 showFieldError(element, errorElement, `Поле "${field.name}" обязательно для заполнения`);
                 if (isValid) {
                     showPopup(`Поле "${field.name}" обязательно для заполнения`, 'error');
@@ -499,7 +499,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 2. Валидация email
         const emailField = document.getElementById('email_organization');
         const emailError = document.getElementById('error_email_organization');
-        if (emailField.value.trim() && !validateEmail(emailField.value.trim())) {
+        if (emailField && emailField.value.trim() && !validateEmail(emailField.value.trim())) {
             showFieldError(emailField, emailError, 'Укажите корректный email адрес');
             if (isValid) {
                 showPopup('Укажите корректный email адрес', 'error');
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', function () {
         phoneFields.forEach(field => {
             const element = document.getElementById(field.id);
             const errorElement = document.getElementById(field.errorId);
-            if (element.value.trim() && !validatePhone(element.value.trim())) {
+            if (element && element.value.trim() && !validatePhone(element.value.trim())) {
                 showFieldError(element, errorElement, 'Номер должен содержать минимум 10 цифр');
                 if (isValid) {
                     showPopup('Номер телефона должен содержать минимум 10 цифр', 'error');
@@ -527,27 +527,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 4. Проверка выпадающих списков
         const requiredSelects = [
-            { id: 'event-type', name: 'Формат проведения мероприятия', errorId: 'error_event_type' },
-            { id: 'technical_support', name: 'Техническая поддержка', errorId: 'error_tech_support' }
+            { id: 'event-type', name: 'Формат проведения мероприятия', errorId: 'error_event_type' }
         ];
 
         requiredSelects.forEach(select => {
             const element = document.getElementById(select.id);
             const errorElement = document.getElementById(select.errorId);
 
-            if (select.id === 'technical_support') {
-                const selectedOptions = document.querySelectorAll('#tech-support-select .select-options li.selected');
-                if (selectedOptions.length === 0) {
-                    showSelectError(element, errorElement, `Выберите "${select.name}"`);
-                    if (isValid) {
-                        showPopup(`Выберите "${select.name}"`, 'error');
-                        isValid = false;
-                    }
-                } else {
-                    hideSelectError(element, errorElement);
-                }
-            }
-            else if (!element.value) {
+            if (!element || !element.value) {
                 showSelectError(element, errorElement, `Выберите "${select.name}"`);
                 if (isValid) {
                     showPopup(`Выберите "${select.name}"`, 'error');
@@ -568,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const startRehearsalError = document.getElementById('error_start_datetime-rehearsal');
         const endRehearsalError = document.getElementById('error_end_datetime-rehearsal');
 
-        if (!startDatetime.value) {
+        if (startDatetime && !startDatetime.value) {
             showFieldError(startDatetime, startDatetimeError, 'Укажите дату и время начала');
             if (isValid) {
                 showPopup('Укажите дату и время начала мероприятия', 'error');
@@ -576,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (!endDatetime.value) {
+        if (endDatetime && !endDatetime.value) {
             showFieldError(endDatetime, endDatetimeError, 'Укажите дату и время окончания');
             if (isValid) {
                 showPopup('Укажите дату и время окончания мероприятия', 'error');
@@ -584,24 +571,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (!startRehearsal.value) {
-            showFieldError(startRehearsal, startRehearsalError, 'Укажите дату и время начала репетиции');
-            if (isValid) {
-                showPopup('Укажите дату и время начала репетиции', 'error');
-                isValid = false;
-            }
-        }
-
-        if (!endRehearsal.value) {
-            showFieldError(endRehearsal, endRehearsalError, 'Укажите дату и время окончания репетиции');
-            if (isValid) {
-                showPopup('Укажите дату и время окончания репетиции', 'error');
-                isValid = false;
-            }
-        }
-
         // Проверка, что дата окончания не раньше даты начала
-        if (startDatetime.value && endDatetime.value && new Date(endDatetime.value) < new Date(startDatetime.value)) {
+        if (startDatetime && endDatetime && startDatetime.value && endDatetime.value && new Date(endDatetime.value) < new Date(startDatetime.value)) {
             showFieldError(endDatetime, endDatetimeError, 'Дата окончания не может быть раньше даты начала');
             if (isValid) {
                 showPopup('Дата окончания не может быть раньше даты начала', 'error');
@@ -610,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Проверка, что дата окончания репетиции не раньше даты начала
-        if (startRehearsal.value && endRehearsal.value && new Date(endRehearsal.value) < new Date(startRehearsal.value)) {
+        if (startRehearsal && endRehearsal && startRehearsal.value && endRehearsal.value && new Date(endRehearsal.value) < new Date(startRehearsal.value)) {
             showFieldError(endRehearsal, endRehearsalError, 'Дата окончания репетиции не может быть раньше даты начала');
             if (isValid) {
                 showPopup('Дата окончания репетиции не может быть раньше даты начала', 'error');
@@ -619,28 +590,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // 6. Проверка чекбоксов фото/видео
-        const checkboxError = document.getElementById('error_photo_video');
-        const checkedOptions = document.querySelectorAll('input[name="information_foto_video"]:checked');
-        if (checkedOptions.length === 0) {
-            showCheckboxError(checkboxError, 'Выберите вариант фото/видеосъемки');
-            if (isValid) {
-                showPopup('Выберите вариант фото/видеосъемки', 'error');
-                isValid = false;
+        const checkboxDropdown = document.querySelector('.checkbox-dropdown');
+        if (checkboxDropdown) {
+            const checkboxToggle = checkboxDropdown.querySelector('.checkbox-dropdown-toggle');
+            const checkboxError = document.getElementById('error_photo_video');
+            const checkedOptions = document.querySelectorAll('input[name="information_foto_video"]:checked');
+
+            if (checkedOptions.length === 0) {
+                checkboxToggle.style.borderColor = '#ef5350';
+                if (checkboxError) {
+                    checkboxError.textContent = 'Выберите вариант фото/видеосъемки';
+                    checkboxError.style.display = 'block';
+                }
+                if (isValid) {
+                    showPopup('Выберите вариант фото/видеосъемки', 'error');
+                    isValid = false;
+                }
+            } else {
+                checkboxToggle.style.borderColor = '';
+                if (checkboxError) {
+                    checkboxError.style.display = 'none';
+                }
             }
-        } else {
-            hideCheckboxError(checkboxError);
         }
 
         // 7. Проверка текстовых областей
         const textAreas = [
-            { id: 'myTextarea', name: 'Краткое описание мероприятия', errorId: 'error_description' },
-            { id: 'Textarea', name: 'Наименования организаций', errorId: 'error_organizations' }
+            { id: 'myTextarea', name: 'Краткое описание мероприятия', errorId: 'error_description' }
         ];
 
         textAreas.forEach(area => {
             const element = document.getElementById(area.id);
             const errorElement = document.getElementById(area.errorId);
-            if (!element.value.trim()) {
+            if (!element || !element.value.trim()) {
                 showFieldError(element, errorElement, `Поле "${area.name}" обязательно для заполнения`);
                 if (isValid) {
                     showPopup(`Поле "${area.name}" обязательно для заполнения`, 'error');
@@ -686,29 +668,51 @@ document.addEventListener('DOMContentLoaded', function () {
             el.style.borderColor = '';
         });
 
-        document.getElementById('popup').style.display = 'none';
+        document.querySelectorAll('.checkbox-dropdown-toggle').forEach(el => {
+            el.style.borderColor = '';
+        });
+
+        const popup = document.getElementById('popup');
+        if (popup) popup.style.display = 'none';
     }
 
     function showFieldError(field, errorElement, message) {
-        field.classList.add('error-field');
-        field.style.borderColor = '#ef5350';
+        if (!field) return;
+        
+        if (field.classList.contains('checkbox-dropdown-toggle')) {
+            field.style.borderColor = '#ef5350';
+        } else {
+            field.classList.add('error-field');
+            field.style.borderColor = '#ef5350';
+        }
         if (errorElement) {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
+            errorElement.style.color = '#ef5350';
         }
     }
 
     function hideFieldError(field, errorElement) {
-        field.classList.remove('error-field');
-        field.style.borderColor = '';
+        if (!field) return;
+        
+        if (field.classList.contains('checkbox-dropdown-toggle')) {
+            field.style.borderColor = '';
+        } else {
+            field.classList.remove('error-field');
+            field.style.borderColor = '';
+        }
         if (errorElement) {
             errorElement.style.display = 'none';
         }
     }
 
     function showSelectError(select, errorElement, message) {
-        const styledSelect = select.closest('.custom-select').querySelector('.select-styled');
-        styledSelect.style.borderColor = '#ef5350';
+        if (!select) return;
+        
+        const styledSelect = select.closest('.custom-select')?.querySelector('.select-styled');
+        if (styledSelect) {
+            styledSelect.style.borderColor = '#ef5350';
+        }
         if (errorElement) {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
@@ -716,30 +720,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function hideSelectError(select, errorElement) {
-        const styledSelect = select.closest('.custom-select').querySelector('.select-styled');
-        styledSelect.style.borderColor = '';
-        if (errorElement) {
-            errorElement.style.display = 'none';
+        if (!select) return;
+        
+        const styledSelect = select.closest('.custom-select')?.querySelector('.select-styled');
+        if (styledSelect) {
+            styledSelect.style.borderColor = '';
         }
-    }
-
-    function showCheckboxError(errorElement, message) {
-        document.querySelector('.checkbox-dropdown-toggle').style.borderColor = '#ef5350';
-        if (errorElement) {
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
-        }
-    }
-
-    function hideCheckboxError(errorElement) {
-        document.querySelector('.checkbox-dropdown-toggle').style.borderColor = '';
         if (errorElement) {
             errorElement.style.display = 'none';
         }
     }
 
     function showFileError(errorElement, message) {
-        document.getElementById('uploadArea').style.borderColor = '#ef5350';
+        const uploadArea = document.getElementById('uploadArea');
+        if (uploadArea) {
+            uploadArea.style.borderColor = '#ef5350';
+        }
         if (errorElement) {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
@@ -747,14 +743,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function hideFileError(errorElement) {
-        document.getElementById('uploadArea').style.borderColor = '';
+        const uploadArea = document.getElementById('uploadArea');
+        if (uploadArea) {
+            uploadArea.style.borderColor = '';
+        }
         if (errorElement) {
             errorElement.style.display = 'none';
         }
     }
 
     function scrollToFirstError() {
-        const firstError = document.querySelector('.error-field, .custom-select .select-styled[style*="border-color: rgb(239, 83, 80)"]');
+        const firstError = document.querySelector('.error-field, .custom-select .select-styled[style*="border-color: rgb(239, 83, 80)"], .checkbox-dropdown-toggle[style*="border-color: rgb(239, 83, 80)"]');
         if (firstError) {
             firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -773,6 +772,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showPopup(message, type) {
         const popup = document.getElementById('popup');
+        if (!popup) return;
+        
         popup.textContent = message;
         popup.className = `popup ${type}`;
         popup.style.display = 'block';
@@ -781,13 +782,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
-    
-    if (type === 'success') {
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 3000);
     }
-}
 
     function initFieldValidation() {
         // Обработчики для текстовых полей
@@ -856,29 +851,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (startDatetime && endDatetime) {
             startDatetime.addEventListener('change', function () {
-                hideFieldError(startDatetime, startDatetimeError);
+                if (startDatetimeError) hideFieldError(startDatetime, startDatetimeError);
                 validateDateTimeRange();
             });
             endDatetime.addEventListener('change', function () {
-                hideFieldError(endDatetime, endDatetimeError);
+                if (endDatetimeError) hideFieldError(endDatetime, endDatetimeError);
                 validateDateTimeRange();
             });
         }
 
         if (startRehearsal && endRehearsal) {
             startRehearsal.addEventListener('change', function () {
-                hideFieldError(startRehearsal, startRehearsalError);
+                if (startRehearsalError) hideFieldError(startRehearsal, startRehearsalError);
                 validateRehearsalRange();
             });
             endRehearsal.addEventListener('change', function () {
-                hideFieldError(endRehearsal, endRehearsalError);
+                if (endRehearsalError) hideFieldError(endRehearsal, endRehearsalError);
                 validateRehearsalRange();
             });
         }
 
+        document.querySelectorAll('input[type="date"], input[type="datetime-local"]').forEach(input => {
+            input.addEventListener('change', function () {
+                // При изменении даты цвет текста обновится автоматически благодаря CSS
+                if (this.value) {
+                    this.classList.add('has-value');
+                } else {
+                    this.classList.remove('has-value');
+                }
+            });
+
+            // Инициализация при загрузке страницы
+            if (input.value) {
+                input.classList.add('has-value');
+            }
+        });
+
         function validateDateTimeRange() {
-            const startValue = startDatetime.value;
-            const endValue = endDatetime.value;
+            const startValue = startDatetime?.value;
+            const endValue = endDatetime?.value;
 
             if (startValue && endValue) {
                 const startDate = new Date(startValue);
@@ -893,15 +904,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function validateRehearsalRange() {
-            const startValue = startRehearsal.value;
-            const endValue = endRehearsal.value;
+            const startValue = startRehearsal?.value;
+            const endValue = endRehearsal?.value;
 
             if (startValue && endValue) {
                 const startDate = new Date(startValue);
                 const endDate = new Date(endValue);
 
                 if (endDate < startDate) {
-                    showFieldError(endRehearsal, endRehearsalError, 'Дата окончания не может быть раньше даты начала');
+                    showFieldError(endRehearsal, endRehearsalError, 'Дата окончания репетиции не может быть раньше даты начала');
                 } else {
                     hideFieldError(endRehearsal, endRehearsalError);
                 }
@@ -911,8 +922,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // Обработчики для чекбоксов
         document.querySelectorAll('input[name="information_foto_video"]').forEach(checkbox => {
             checkbox.addEventListener('change', function () {
+                const checkboxDropdown = document.querySelector('.checkbox-dropdown');
+                if (!checkboxDropdown) return;
+                
+                const checkboxToggle = checkboxDropdown.querySelector('.checkbox-dropdown-toggle');
                 const errorElement = document.getElementById('error_photo_video');
-                hideCheckboxError(errorElement);
+
+                checkboxToggle.style.borderColor = '';
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
             });
         });
     }
@@ -925,9 +944,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-// Инициализация всех функций
-initCustomSelects();
-initAutoResizeTextarea();
-initCheckboxDropdowns();
-initFieldValidation();
+    // Инициализация всех функций
+    initCustomSelects();
+    initAutoResizeTextarea();
+    initCheckboxDropdowns();
+    initFieldValidation();
 });
