@@ -9,58 +9,69 @@
     <link rel="stylesheet" href="header_footer.css">
     <link rel="stylesheet" href="adaptive_header_footer.css">
 </head>
-<body>
-<header class="header">
-    <div class="container">
-        <div class="burger" id="burger">
-            <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="m464.883 64.267h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
-                <path
-                    d="m464.883 208.867h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
-                <path
-                    d="m464.883 353.467h-417.766c-25.98 0-47.117 21.137-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.012-21.137-47.149-47.117-47.149z" />
+<!-- Модальное окно -->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
         </div>
-        <button class="login-button">Вход</button>
-        <nav class="menu" id="menu">
-            <div class="close">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 492 492"
-                    style="enable-background:new 0 0 492 492;" xml:space="preserve">
-                    <g>
+        <h3 class="modal-title">Успешно!</h3>
+        <p class="modal-message" id="modal-message">Ваша заявка успешно отправлена!</p>
+        <button class="modal-close" id="modal-close">OK</button>
+    </div>
+</div>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="burger" id="burger">
+                <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m464.883 64.267h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                    <path
+                        d="m464.883 208.867h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                    <path
+                        d="m464.883 353.467h-417.766c-25.98 0-47.117 21.137-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.012-21.137-47.149-47.117-47.149z" />
+                </svg>
+            </div>
+            <button class="login-button">Вход</button>
+            <nav class="menu" id="menu">
+                <div class="close">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 492 492"
+                        style="enable-background:new 0 0 492 492;" xml:space="preserve">
                         <g>
-                            <path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
+                            <g>
+                                <path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
 			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
 			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052
 			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116
 			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952
 			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
 			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z" />
+                            </g>
                         </g>
-                    </g>
+                    </svg>
+                </div>
+                <a href="#" class="menu-item">Главная</a>
+                <a href="#" class="menu-item">Новости и анонсы</a>
+                <img src="images/logo.png" alt="Логотип" class="logo">
+                <a href="#" class="menu-item">О нас</a>
+                <a href="#" class="menu-item">Контакты</a>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="поиск" class="search-input">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.66666 0C2.99267 0 0 2.99267 0 6.66666C0 10.3407 2.99267 13.3333 6.66666 13.3333C8.26434 13.3333 9.73158 12.766 10.8815 11.8242L14.862 15.8047C15.0292 15.9788 15.2775 16.049 15.5111 15.9881C15.7447 15.9272 15.9272 15.7447 15.9881 15.5111C16.049 15.2775 15.9788 15.0292 15.8047 14.862L11.8242 10.8815C12.766 9.73159 13.3333 8.26434 13.3333 6.66666C13.3333 2.99267 10.3407 0 6.66666 0ZM6.66666 1.33333C9.62008 1.33333 12 3.71325 12 6.66666C12 9.62008 9.62008 12 6.66666 12C3.71325 12 1.33333 9.62008 1.33333 6.66666C1.33333 3.71325 3.71325 1.33333 6.66666 1.33333Z"
+                        fill="#E65E26" />
                 </svg>
             </div>
-            <a href="#" class="menu-item">Главная</a>
-            <a href="#" class="menu-item">Новости и анонсы</a>
-            <img src="images/logo.png" alt="Логотип" class="logo">
-            <a href="#" class="menu-item">О нас</a>
-            <a href="#" class="menu-item">Контакты</a>
-        </nav>
-        <div class="search-container">
-            <input type="text" placeholder="поиск" class="search-input">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M6.66666 0C2.99267 0 0 2.99267 0 6.66666C0 10.3407 2.99267 13.3333 6.66666 13.3333C8.26434 13.3333 9.73158 12.766 10.8815 11.8242L14.862 15.8047C15.0292 15.9788 15.2775 16.049 15.5111 15.9881C15.7447 15.9272 15.9272 15.7447 15.9881 15.5111C16.049 15.2775 15.9788 15.0292 15.8047 14.862L11.8242 10.8815C12.766 9.73159 13.3333 8.26434 13.3333 6.66666C13.3333 2.99267 10.3407 0 6.66666 0ZM6.66666 1.33333C9.62008 1.33333 12 3.71325 12 6.66666C12 9.62008 9.62008 12 6.66666 12C3.71325 12 1.33333 9.62008 1.33333 6.66666C1.33333 3.71325 3.71325 1.33333 6.66666 1.33333Z"
-                    fill="#E65E26" />
-            </svg>
         </div>
-    </div>
-</header>
-
-
+    </header>
     <main class="main">
         <section class="management">
             <div class="container">
@@ -137,10 +148,10 @@
                                 </select>
                                 <div class="select-styled">
                                     <p>Формат проведения мероприятия</p>
-                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <svg class="select-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="select-options">
@@ -155,16 +166,16 @@
                         </div>
                         <div class="date-time-container">
                             <div class="form-group">
-                                <label for="start-datetime">Дата и время начала мероприятия:</label>
+                                <label for="start-datetime">Начало мероприятия:</label>
                                 <input type="datetime-local" id="start-datetime" name="start-datetime" required>
                                 <div id="error_start_datetime" class="error-message" style="color: red; display: none;">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="end-datetime">Дата и время окончания мероприятия:</label>
+                                <label for="end-datetime">Окончание мероприятия:</label>
                                 <input type="datetime-local" id="end-datetime" name="end-datetime" required>
-                                <div id="error_end_datetime" class="error-message" style="color: red; display: none;">
+                                <div id="error_end_datetime" class="error-message">
                                 </div>
                             </div>
                         </div>
@@ -188,7 +199,7 @@
                         </div>
                         <div class="date-time-container">
                             <div class="form-group">
-                                <label for="start-datetime-rehearsal">Дата и время начала!!!!!!!!:</label>
+                                <label for="start-datetime-rehearsal">Начало репетиции</label>
                                 <input type="datetime-local" id="start-datetime-rehearsal"
                                     name="start-datetime-rehearsal" required>
                                 <div id="error_start_datetime-rehearsal" class="error-message"
@@ -196,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="end-datetime-rehearsal">Дата и время окончания:</label>
+                                <label for="end-datetime-rehearsal">Окончание репетиции:</label>
                                 <input type="datetime-local" id="end-datetime-rehearsal" name="end-datetime-rehearsal"
                                     required>
                                 <div id="error_end_datetime-rehearsal" class="error-message"
@@ -204,10 +215,10 @@
                             </div>
                         </div>
                         <div class="form_group">
-                            <h2>Техническая поддержка</h2>
+                            <h2>Техническое обеспечение</h2>
                             <div class="custom-select" id="tech-support-select">
                                 <select class="hidden-select" id="technical_support" required>
-                                    <option value="">-- Выберите формат --</option>
+                                    <option value="">-- Выберите необходимое --</option>
                                     <option value="wardrobe">гардероб</option>
                                     <option value="sound_equipment">звуковое оборудование</option>
                                     <option value="stage_light">сценический свет</option>
@@ -215,11 +226,11 @@
                                     <option value="projection_equipment">проекционное оборудование</option>
                                 </select>
                                 <div class="select-styled">
-                                    <p>Выберите формат</p>
-                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <p>Выберите необходимое</p>
+                                    <svg class="select-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="select-options">
@@ -241,12 +252,12 @@
                             <h2>Выберите информацию об использовании фото и видеосъёмки</h2>
                             <div class="checkbox-dropdown">
                                 <div class="checkbox-dropdown-toggle">
-                                    <span class="selected-text">Выберите варианты</span>
+                                    <span class="selected-text">Выберите необходимое</span>
                                     <span class="selected-count"></span>
-                                    <svg class="checkbox-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="35"
-                                        height="35" viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <svg class="ckbox-dropdown-arrow" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="checkbox-dropdown-menu">
@@ -287,8 +298,10 @@
 
                                 <label for="fileInput" class="upload-area" id="uploadArea">
                                     <span id="uploadText">Загрузить сценарий</span>
-                                    <svg class="file-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                                    <svg class="plus_svg" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14" />
                                     </svg>
                                 </label>
 
@@ -435,4 +448,5 @@
 </body>
 <script src="forms.js"></script>
 <script src="header_footer.js"></script>
+
 </html>
