@@ -7,97 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const hiddenSelect = select.querySelector('.hidden-select');
             const arrow = select.querySelector('.select-arrow');
 
-            // Для множественного выбора создаем контейнер для тегов
-            const tagsContainer = document.createElement('div');
-            tagsContainer.className = 'multi-select-tags';
-            select.appendChild(tagsContainer);
-
-            styled.addEventListener('click', function (e) {
-                e.stopPropagation();
-
-                // Закрываем другие select
-                document.querySelectorAll('.select-options').forEach(other => {
-                    if (other !== options) {
-                        other.style.display = 'none';
-                        other.closest('.custom-select')
-                            .querySelector('.select-styled')
-                            .classList.remove('active');
-                    }
-                });
-
-                // Переключаем текущий select
-                const isActive = options.style.display === 'block';
-                options.style.display = isActive ? 'none' : 'block';
-                styled.classList.toggle('active', !isActive);
-
-                if (arrow) {
-                    arrow.style.transform = options.style.display === 'block'
-                        ? 'rotate(180deg)'
-                        : 'rotate(0deg)';
-                }
-            });
-
-            // Обработка выбора пункта
-            select.querySelectorAll('.select-options li').forEach(item => {
-                item.addEventListener('click', function () {
-                    const value = this.getAttribute('data-value');
-                    const text = this.textContent;
-
-                    // Для технической поддержки делаем множественный выбор
-                    if (select.id === 'tech-support-select') {
-                        this.classList.toggle('selected');
-
-                        // Обновляем скрытый select
-                        const selectedOptions = Array.from(select.querySelectorAll('.select-options li.selected'))
-                            .map(li => li.getAttribute('data-value'));
-
-                        hiddenSelect.innerHTML = '';
-                        if (selectedOptions.length === 0) {
-                            hiddenSelect.appendChild(new Option('-- Выберите формат --', ''));
-                        } else {
-                            selectedOptions.forEach(opt => {
-                                hiddenSelect.appendChild(new Option(
-                                    select.querySelector(`.select-options li[data-value="${opt}"]`).textContent,
-                                    opt
-                                ));
-                            });
-                        }
-
-                        // Обновляем теги
-                        updateTags(select, selectedOptions);
-
-                        // Показываем дополнительные поля для всех выбранных опций
-                        showTechExtraFields(selectedOptions);
-
-                        // Скрываем ошибку при выборе
-                        const errorElement = document.getElementById('error_tech_support');
-                        if (errorElement) {
-                            hideSelectError(hiddenSelect, errorElement);
-                        }
-                    } else {
-                        // Для других select оставляем одиночный выбор
-                        select.querySelectorAll('.select-options li').forEach(li => {
-                            li.classList.remove('selected');
-                        });
-                        this.classList.add('selected');
-
-                        // Обновляем отображаемый текст
-                        styled.querySelector('p').textContent = text;
-                        styled.classList.add('has-selection');
-                        hiddenSelect.value = value;
-
-                        // Скрываем ошибку при выборе
-                        const errorElement = document.getElementById('error_' + hiddenSelect.id.replace(/-/g, '_'));
-                        if (errorElement) {
-                            hideSelectError(hiddenSelect, errorElement);
-                        }
-                    }
-                });
-            });
+            // Создаем контейнер для тегов (если еще не существует)
+            let tagsContainer = select.querySelector('.multi-select-tags');
+            if (!tagsContainer) {
+                tagsContainer = document.createElement('div');
+                tagsContainer.className = 'multi-select-tags';
+                select.appendChild(tagsContainer);
+            }
 
             // Функция обновления тегов
-            function updateTags(select, selectedValues) {
-                const tagsContainer = select.querySelector('.multi-select-tags');
+            const updateTags = (selectedValues) => {
                 tagsContainer.innerHTML = '';
 
                 selectedValues.forEach(value => {
@@ -105,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const tag = document.createElement('div');
                     tag.className = 'multi-select-tag';
                     tag.innerHTML = `
-                        ${text}
-                        <button type="button" data-value="${value}">×</button>
-                    `;
+                    ${text}
+                    <button type="button" data-value="${value}">×</button>
+                `;
                     tagsContainer.appendChild(tag);
 
                     // Обработчик удаления тега
@@ -118,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         li.classList.remove('selected');
 
                         const newSelectedValues = selectedValues.filter(v => v !== valueToRemove);
-                        updateTags(select, newSelectedValues);
+                        updateTags(newSelectedValues);
 
                         // Обновляем скрытый select
                         hiddenSelect.innerHTML = '';
@@ -136,19 +55,102 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
 
                         // Обновляем дополнительные поля
-                        showTechExtraFields(newSelectedValues);
+                        if (select.id === 'tech-support-select') {
+                            showTechExtraFields(newSelectedValues);
+                        }
                     });
                 });
-            }
-        });
+            };
 
-        // Закрытие при клике вне меню
-        document.addEventListener('click', function () {
-            document.querySelectorAll('.select-options').forEach(options => {
-                options.style.display = 'none';
-                options.closest('.custom-select')
-                    .querySelector('.select-styled')
-                    .classList.remove('active');
+            styled.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isActive = options.style.display === 'block';
+
+                // Закрываем другие select
+                document.querySelectorAll('.select-options').forEach(other => {
+                    if (other !== options) {
+                        other.style.display = 'none';
+                        other.closest('.custom-select')
+                            .querySelector('.select-styled')
+                            .classList.remove('active');
+                        const otherArrow = other.closest('.custom-select').querySelector('.select-arrow');
+                        if (otherArrow) otherArrow.style.transform = 'rotate(90deg)';
+                    }
+                });
+
+                // Переключаем текущий select
+                options.style.display = isActive ? 'none' : 'block';
+                styled.classList.toggle('active', !isActive);
+
+                if (arrow) {
+                    arrow.style.transform = options.style.display === 'block'
+                        ? 'rotate(270deg)'
+                        : 'rotate(90deg)';
+                }
+            });
+
+            // Обработка выбора пункта
+            select.querySelectorAll('.select-options li').forEach(item => {
+                item.addEventListener('click', function () {
+                    const value = this.getAttribute('data-value');
+                    const text = this.textContent;
+
+                    if (select.id === 'tech-support-select') {
+                        this.classList.toggle('selected');
+
+                        const selectedOptions = Array.from(
+                            select.querySelectorAll('.select-options li.selected')
+                        ).map(li => li.getAttribute('data-value'));
+
+                        // Обновляем скрытый select
+                        hiddenSelect.innerHTML = '';
+                        if (selectedOptions.length === 0) {
+                            hiddenSelect.appendChild(new Option('-- Выберите формат --', ''));
+                            styled.querySelector('p').textContent = 'Выберите формат';
+                            styled.classList.remove('has-selection');
+                        } else {
+                            selectedOptions.forEach(opt => {
+                                hiddenSelect.appendChild(new Option(
+                                    select.querySelector(`.select-options li[data-value="${opt}"]`).textContent,
+                                    opt
+                                ));
+                            });
+                            styled.querySelector('p').textContent = `Выбрано ${selectedOptions.length}`;
+                            styled.classList.add('has-selection');
+                        }
+
+                        // Обновляем теги
+                        updateTags(selectedOptions);
+                        showTechExtraFields(selectedOptions);
+                    } else {
+                        // Обычный select (не tech-support)
+                        select.querySelectorAll('.select-options li').forEach(li => {
+                            li.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        styled.querySelector('p').textContent = text;
+                        styled.classList.add('has-selection');
+                        hiddenSelect.value = value;
+                        options.style.display = 'none';
+                        styled.classList.remove('active');
+                        if (arrow) arrow.style.transform = 'rotate(90deg)';
+                    }
+
+                    // Скрываем ошибку
+                    const errorElement = document.getElementById('error_' + hiddenSelect.id.replace(/-/g, '_'));
+                    if (errorElement) errorElement.style.display = 'none';
+                });
+            });
+
+            // Закрытие при клике вне меню
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.select-options').forEach(options => {
+                    options.style.display = 'none';
+                    const selectStyled = options.closest('.custom-select').querySelector('.select-styled');
+                    selectStyled.classList.remove('active');
+                    const arrow = selectStyled.querySelector('.select-arrow');
+                    if (arrow) arrow.style.transform = 'rotate(90deg)';
+                });
             });
         });
     }
@@ -239,6 +241,24 @@ document.addEventListener('DOMContentLoaded', function () {
             const selectedText = dropdown.querySelector('.selected-text');
             const selectedCount = dropdown.querySelector('.selected-count');
             const checkboxError = document.getElementById('error_photo_video');
+            const arrow = dropdown.querySelector('.ckbox-dropdown-arrow');
+
+            // Функция обновления текста выбранных вариантов
+            const updateSelectedText = () => {
+                const selected = dropdown.querySelectorAll('.checkbox-dropdown-item.selected');
+                const count = selected.length;
+
+                if (count === 0) {
+                    selectedText.textContent = 'Выберите необходимое';
+                    selectedCount.textContent = '';
+                } else if (count === 1) {
+                    selectedText.textContent = 'Выбран вариант';
+                    selectedCount.textContent = count;
+                } else {
+                    selectedText.textContent = 'Выбрано несколько вариантов';
+                    selectedCount.textContent = count;
+                }
+            };
 
             // Обработчик клика по toggle
             toggle.addEventListener('click', function (e) {
@@ -247,19 +267,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Закрываем все другие меню
                 document.querySelectorAll('.checkbox-dropdown-menu').forEach(m => {
-                    if (m !== menu) m.classList.remove('show');
+                    if (m !== menu) {
+                        m.classList.remove('show');
+                        const otherToggle = m.closest('.checkbox-dropdown').querySelector('.checkbox-dropdown-toggle');
+                        otherToggle.classList.remove('active');
+                        const otherArrow = otherToggle.querySelector('.ckbox-dropdown-arrow');
+                        if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                    }
                 });
 
                 // Переключаем текущее меню
                 menu.classList.toggle('show', !isActive);
                 toggle.classList.toggle('active', !isActive);
 
+                // Поворачиваем стрелку
+                if (arrow) {
+                    arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+
                 // Сбрасываем ошибку при открытии меню
-                if (!isActive) {
-                    toggle.style.borderColor = '';
-                    if (checkboxError) {
-                        checkboxError.style.display = 'none';
-                    }
+                if (!isActive && checkboxError) {
+                    checkboxError.style.display = 'none';
                 }
             });
 
@@ -268,14 +296,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 item.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const checkbox = item.querySelector('input[type="checkbox"]');
-                    const value = checkbox.value;
                     const isChecked = !checkbox.checked;
 
                     // Проверка условий
-                    let isValid = true;
-                    let errorMessage = '';
-
-                    if (value === 'without_foto_video' && isChecked) {
+                    if (checkbox.value === 'without_foto_video' && isChecked) {
                         // Если выбрано "не предполагается", снимаем другие выборы
                         items.forEach(otherItem => {
                             if (otherItem !== item) {
@@ -284,16 +308,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                 otherItem.classList.remove('selected');
                             }
                         });
-                    } else if (isChecked && dropdown.querySelector('#without_foto_video').checked) {
+                    } else if (isChecked && dropdown.querySelector('#without_foto_video:checked')) {
                         // Если уже выбрано "не предполагается", запрещаем другие выборы
-                        isValid = false;
-                        errorMessage = 'Нельзя выбрать другие варианты вместе с "не предполагается фото/видеосъемка"';
-                    }
-
-                    if (!isValid) {
                         toggle.style.borderColor = '#ef5350';
                         if (checkboxError) {
-                            checkboxError.textContent = errorMessage;
+                            checkboxError.textContent = 'Нельзя выбрать другие варианты вместе с "не предполагается фото/видеосъемка"';
                             checkboxError.style.display = 'block';
                         }
                         return;
@@ -305,34 +324,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Сбрасываем ошибку
                     toggle.style.borderColor = '';
-                    if (checkboxError) {
-                        checkboxError.style.display = 'none';
-                    }
+                    if (checkboxError) checkboxError.style.display = 'none';
 
                     updateSelectedText();
                 });
             });
 
-            function updateSelectedText() {
-                const selected = dropdown.querySelectorAll('.checkbox-dropdown-item.selected');
-                const count = selected.length;
-
-                if (count === 0) {
-                    selectedText.textContent = 'Выберите варианты';
-                    selectedCount.textContent = '';
-                } else if (count === 1) {
-                    selectedText.textContent = 'Выбран вариант';
-                    selectedCount.textContent = count;
-                } else {
-                    selectedText.textContent = 'Выбрано несколько вариантов';
-                    selectedCount.textContent = count;
-                }
-            }
-
             // Закрытие при клике вне меню
             document.addEventListener('click', function () {
                 menu.classList.remove('show');
                 toggle.classList.remove('active');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
             });
 
             // Инициализация текста
@@ -402,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const fileName = document.createElement('span');
             fileName.className = 'file-name';
             fileName.textContent = file.name;
-            fileName.title = file.name;
+            fileName.title = file.name; // Добавляем title для отображения полного имени при наведении
 
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'delete-btn';
@@ -446,17 +448,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateStatusText() {
         uploadText.textContent = currentFiles.length ?
             `Сценарий` :
-            'Загрузить сценарий (макс. 20)';
+            'Загрузить сценарий';
     }
 
     function getFileIcon(filename) {
         const ext = filename.split('.').pop().toLowerCase();
         const icons = {
-            pdf: '📄',
-            doc: '📝',
-            docx: '📝',
-            txt: '📑',
-            default: '📂'
+            pdf: '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="currentColor" d="M10.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM14 5h-3.5a.5.5 0 0 1-.5-.5V1H2v14h12zm-8.5 7a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1z"/></svg>',
+            doc: '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="currentColor" d="M10.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM14 5h-3.5a.5.5 0 0 1-.5-.5V1H2v14h12zm-8.5 7a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1z"/></svg>',
+            docx: '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="currentColor" d="M10.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM14 5h-3.5a.5.5 0 0 1-.5-.5V1H2v14h12zm-8.5 7a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1z"/></svg>',
+            txt: '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="currentColor" d="M10.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM14 5h-3.5a.5.5 0 0 1-.5-.5V1H2v14h12zm-8.5 7a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1z"/></svg>',
+            default: '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="currentColor" d="M10.8 0c.274 0 .537.113.726.312l3.2 3.428c.176.186.274.433.274.689V15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM14 5h-3.5a.5.5 0 0 1-.5-.5V1H2v14h12zm-8.5 7a.5.5 0 1 1 0-1h5a.5.5 0 1 1 0 1zm0-3a.5.5 0 0 1 0-1h5a.5.5 0 1 1 0 1z"/></svg>'
         };
         return icons[ext] || icons.default;
     }
@@ -678,7 +680,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showFieldError(field, errorElement, message) {
         if (!field) return;
-        
+
         if (field.classList.contains('checkbox-dropdown-toggle')) {
             field.style.borderColor = '#ef5350';
         } else {
@@ -689,12 +691,15 @@ document.addEventListener('DOMContentLoaded', function () {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
             errorElement.style.color = '#ef5350';
+
+            // Убедитесь, что элемент занимает место в потоке документа
+            errorElement.style.position = 'static';
+            errorElement.style.marginBottom = '7px';
         }
     }
-
     function hideFieldError(field, errorElement) {
         if (!field) return;
-        
+
         if (field.classList.contains('checkbox-dropdown-toggle')) {
             field.style.borderColor = '';
         } else {
@@ -708,7 +713,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showSelectError(select, errorElement, message) {
         if (!select) return;
-        
+
         const styledSelect = select.closest('.custom-select')?.querySelector('.select-styled');
         if (styledSelect) {
             styledSelect.style.borderColor = '#ef5350';
@@ -721,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function hideSelectError(select, errorElement) {
         if (!select) return;
-        
+
         const styledSelect = select.closest('.custom-select')?.querySelector('.select-styled');
         if (styledSelect) {
             styledSelect.style.borderColor = '';
@@ -771,17 +776,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showPopup(message, type) {
-        const popup = document.getElementById('popup');
-        if (!popup) return;
-        
-        popup.textContent = message;
-        popup.className = `popup ${type}`;
-        popup.style.display = 'block';
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalMessage = document.getElementById('modal-message');
+        const modalTitle = document.querySelector('.modal-title');
+        const successIcon = document.querySelector('.modal-success-icon');
 
-        // Автоматическое скрытие через 3 секунды для всех типов сообщений
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 3000);
+        if (!modalOverlay || !modalMessage) return;
+
+        // Устанавливаем сообщение
+        modalMessage.textContent = message;
+
+        // Настраиваем стили в зависимости от типа сообщения
+        const modalContent = modalOverlay.querySelector('.modal-content');
+        if (type === 'error') {
+            modalTitle.textContent = 'Ошибка';
+            modalContent.style.border = '2px solid #ef5350';
+            modalMessage.style.color = '#d32f2f';
+            successIcon.style.display = 'none';
+        } else if (type === 'success') {
+            modalTitle.textContent = 'Успешно!';
+            modalContent.style.border = '2px solid #66bb6a';
+            modalMessage.style.color = '#2e7d32';
+            successIcon.style.display = 'flex';
+        } else {
+            modalTitle.textContent = 'Информация';
+            modalContent.style.border = '2px solid #42a5f5';
+            modalMessage.style.color = '#1565c0';
+            successIcon.style.display = 'none';
+        }
+
+        // Показываем модальное окно
+        modalOverlay.classList.add('active');
+
+        // Обработчик закрытия модального окна
+        document.getElementById('modal-close').onclick = function () {
+            modalOverlay.classList.remove('active');
+        };
+
+        // Закрытие при клике вне модального окна
+        modalOverlay.onclick = function (e) {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        };
     }
 
     function initFieldValidation() {
@@ -897,6 +934,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (endDate < startDate) {
                     showFieldError(endDatetime, endDatetimeError, 'Дата окончания не может быть раньше даты начала');
+                    // Убрали scrollIntoView, чтобы не прыгало вверх
                 } else {
                     hideFieldError(endDatetime, endDatetimeError);
                 }
@@ -924,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function () {
             checkbox.addEventListener('change', function () {
                 const checkboxDropdown = document.querySelector('.checkbox-dropdown');
                 if (!checkboxDropdown) return;
-                
+
                 const checkboxToggle = checkboxDropdown.querySelector('.checkbox-dropdown-toggle');
                 const errorElement = document.getElementById('error_photo_video');
 
@@ -940,7 +978,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.send_form')?.addEventListener('click', function (e) {
         e.preventDefault();
         if (validateForm()) {
-            alert('Форма успешно отправлена!');
+            showPopup('Форма успешно отправлена!', 'success');
+            // Здесь можно добавить код для реальной отправки формы
         }
     });
 

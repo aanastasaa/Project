@@ -45,36 +45,55 @@ img {
 }
 
 .form_title {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 /* Button styles */
+.arrow_next {
+    transform: rotate(180deg);
+    transform-origin: center; /* Центр вращения */
+} 
+.ckbox-dropdown-arrow {
+    height:35px;
+    width:35px;
+    transition: transform 0.3s ease !important;
+    transform: rotate(90deg) !important;
+}
+.checkbox-dropdown-toggle.active .ckbox-dropdown-arrow {
+    transform: rotate(270deg) !important;
+}
 .button_next {
+    background-color: #FFFFFF;
+    border: 1px solid #E65E26;
+    height:60px;
+    width:160px;
+    color: #E65E26;
     padding: 8px 15px;
+    font-size: 24px;
     border-radius: 10px;
-    background: #fff;
-    border: 1px solid #e65e26;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 27px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
-    height: 60px;
-    gap: 50px;
 }
-
 .button_next:hover {
-    background-color: #f8f8f8;
+    background-color: #E65E26;
+    color: #FFFFFF;
 }
 
-.next-btn__text {
-    color: #e65e26;
-    font-size: 24px;
-    font-weight: 700;
+.button_next .arrow_next {
+    transition: stroke 0.3s ease;
 }
 
+.button_next:hover .arrow_next path {
+    stroke: #FFFFFF;
+}
 .management .container {
     max-width: 1920px;
-    padding: 25px 240px 0 240px;
+    padding: 90px 240px 25px 240px;
     text-align: center;
 }
 
@@ -104,6 +123,146 @@ img {
     gap: 25px;
 }
 
+
+
+/* Модальное окно */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-title {
+    color: #22387d;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.modal-message {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-close {
+    background-color: #22387D;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 160px;
+    height: 60px;
+    font-size: 24px;
+    line-height: 27px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    transform: translateY(-2px);
+    background-color: #3652ab;
+}
+
+
+/* Иконка успеха */
+.modal-success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8f5e9;
+    border-radius: 50%;
+    animation: scaleIn 0.5s ease;
+}
+
+.modal-success-icon svg {
+    width: 50px;
+    height: 50px;
+    color: #2e7d32;
+}
+/**/
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .modal-title {
+        font-size: 20px;
+    }
+    
+    .modal-message {
+        font-size: 16px;
+    }
+    
+    .modal-close {
+    width: 65px;
+        height: 34px;
+        line-height: 20px;
+        font-size: 12px;
+    }
+    
+    .modal-success-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .modal-success-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+
 .form_group {
     width: 100%;
 }
@@ -131,6 +290,8 @@ img {
     outline: none;
     border-color: #22387d;
 }
+
+
 
 textarea {
     resize: none;
@@ -188,6 +349,9 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    color:#000;
+    transform: rotate(90deg);
+    transform-origin: center; /* Центр вращения */
 }
 
 .select-styled.active .select-arrow {
@@ -233,7 +397,7 @@ textarea {
 .date-time-container {
     display: flex;
     gap: 25px;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .form-group {
@@ -252,7 +416,7 @@ textarea {
 input[type="date"],
 input[type="datetime-local"] {
     width: 100%;
-    padding: 21px 25px;
+    padding: 18px 25px;
     font-size: 24px;
     border: 2px solid #929292;
     border-radius: 35px;
@@ -272,7 +436,7 @@ input[type="datetime-local"] {
 }
 
 .checkbox-dropdown-toggle {
-    padding: 15px 25px;
+    padding: 20px 25px;
     border: 2px solid #929292;
     border-radius: 35px;
     background: #fff;
@@ -292,18 +456,6 @@ input[type="datetime-local"] {
     color: #333;
 }
 
-.checkbox-dropdown-arrow {
-    width: 35px;
-    height: 35px;
-    transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.checkbox-dropdown-toggle.active .checkbox-dropdown-arrow {
-    transform: rotate(180deg);
-}
 
 .checkbox-dropdown-menu {
     display: none;
@@ -382,7 +534,7 @@ input[type="checkbox"] {
     width: 24px;
     height: 24px;
     border: 2px solid #929292;
-    border-radius: 6px;
+    border-radius: 35px;
     background: #fff;
 }
 
@@ -438,7 +590,7 @@ input[type="checkbox"] {
     border: 2px solid #929292;
     border-radius: 35px;
     background: #fff;
-    padding: 15px 25px;
+    padding: 18px 25px;
     width: 100%;
     color: #929292;
     font-size: 20px;
@@ -489,20 +641,27 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #f9f9f9;
-    border-radius: 35px;
-    padding: 15px 25px;
+    overflow: hidden; /* Важно для работы text-overflow */
 }
 
+.file-info {
+    flex: 1;
+    min-width: 0; /* Критически важно для работы text-overflow во flex-контейнере */
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    margin-top:7px;
+}
 .file-name {
     font-size: 18px;
     color: #333;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 40px); /* Учитываем место для кнопки удаления */
+    display: inline-block;
+    vertical-align: middle;
 }
-
 .delete-btn {
     background: none;
     border: none;
@@ -525,11 +684,6 @@ input[type="checkbox"] {
     height: 20px;
 }
 
-.file-info {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-}
 
 .file-type-icon {
     margin-right: 10px;
@@ -537,6 +691,9 @@ input[type="checkbox"] {
     font-size: 20px;
 }
 
+.plus_svg{
+    color:#000;
+}
 .status-text {
     text-align: center;
     color: #666;
@@ -732,6 +889,23 @@ input[type="checkbox"] {
     }
 }
 
+/* Анимация появления формы */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form_body {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+
 /* Основной фикс для технической поддержки */
 #tech-support-select {
     margin-bottom: 0;
@@ -806,7 +980,6 @@ input[type="checkbox"] {
 
 .send_form:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(34, 56, 125, 0.3);
 }
 .file-item{
     margin-top:7px;
@@ -846,18 +1019,17 @@ input[type="checkbox"] {
 
 /* Responsive styles */
 @media screen and (max-width: 1770px) {
-    .button_next {
+    .button_next{
+        width: 140px;
         height: 50px;
-        gap: 40px;
+        font-size: 20px;
+    }
+    .next-btn__text{
+        font-size: 20px;
     }
     .send_form{
         height: 50px;
     }
-
-    .next-btn__text {
-        font-size: 20px;
-    }
-
     .form_body {
         padding: 50px 80px;
     }
@@ -914,13 +1086,15 @@ input[type="checkbox"] {
 @media screen and (max-width: 1445px) {
     .button_next {
         height: 50px;
-        gap: 5px;
+        width:100px;
+        padding: 8px 10px; /* Уменьшите отступы */
+        gap: 5px; /* Уменьшите расстояние между стрелкой и текстом */
     }
     .send_form{
         height: 50px;
     }
     .management .container {
-        padding: 25px 120px;
+        padding: 90px 120px 25px 120px;
     }
 
     .form .container {
@@ -945,7 +1119,7 @@ input[type="checkbox"] {
         font-size: 16px;
     }
     .management .container {
-        padding: 25px 80px;
+        padding: 90px 80px 25px 80px;
     }
 
     .form .container {
@@ -971,9 +1145,16 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 1229px) {
+    .form_title{
+        margin-bottom:25px;
+    }
+    .management .container{
+        padding: 60px 80px 25px 80px;
+    }
     .button_next {
         height: 40px;
         border-radius: 8px;
+        width: 80px;
     }
     .send_form{
         height: 40px;
@@ -991,16 +1172,15 @@ input[type="checkbox"] {
         flex-direction: column;
         gap: 15px;
     }
-     
-    
-
+    .footer{
+        margin-top:60px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
-    .management .container {
-        padding: 25px 60px;
+    .management .container{
+        padding: 60px 60px 25px 60px;
     }
-
     .form .container {
         padding: 0 60px;
     }
@@ -1012,12 +1192,18 @@ input[type="checkbox"] {
     .container-form {
         padding: 0 100px;
     }
-
+    .button_next {
+        width: 80px;
+        height: 40px;
+    }
 }
 
 @media screen and (max-width: 850px) {
     .button_next {
         height: 38px;
+        width: 70px;
+    }
+    .next-btn__text{
         font-size: 14px;
     }
     .send_form{
@@ -1035,16 +1221,22 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 768px) {
-    .button-next {
+    .button_next {
         height: 34px;
+        width: 65px;
+        font-size: 12px;
+    }
+    .next-btn__text{
+        line-height: 20px;
         font-size: 12px;
     }
     .send_form {
         height: 34px;
         font-size: 12px;
     }
+    
     .management .container {
-        padding: 25px 40px;
+        padding: 60px 40px 25px 40px;
     }
 
     .form .container {
@@ -1092,7 +1284,7 @@ input[type="checkbox"] {
 
 @media screen and (max-width: 424px) {
     .management .container {
-        padding: 25px;
+        padding: 60px 25px 25px 25px;
     }
 
     .form .container {

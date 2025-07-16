@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="header_footer.css">
     <link rel="stylesheet" href="adaptive_header_footer.css">
 </head>
+<!-- Модальное окно -->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        <h3 class="modal-title">Успешно!</h3>
+        <p class="modal-message" id="modal-message">Ваша заявка успешно отправлена!</p>
+        <button class="modal-close" id="modal-close">OK</button>
+    </div>
+</div>
 <body>
     <header class="header">
         <div class="container">
@@ -59,8 +72,6 @@
             </div>
         </div>
     </header>
-
-
     <main class="main">
         <section class="management">
             <div class="container">
@@ -137,10 +148,10 @@
                                 </select>
                                 <div class="select-styled">
                                     <p>Формат проведения мероприятия</p>
-                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <svg class="select-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="select-options">
@@ -155,16 +166,16 @@
                         </div>
                         <div class="date-time-container">
                             <div class="form-group">
-                                <label for="start-datetime">Дата и время начала мероприятия:</label>
+                                <label for="start-datetime">Начало мероприятия:</label>
                                 <input type="datetime-local" id="start-datetime" name="start-datetime" required>
                                 <div id="error_start_datetime" class="error-message" style="color: red; display: none;">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="end-datetime">Дата и время окончания мероприятия:</label>
+                                <label for="end-datetime">Окончание мероприятия:</label>
                                 <input type="datetime-local" id="end-datetime" name="end-datetime" required>
-                                <div id="error_end_datetime" class="error-message" style="color: red; display: none;">
+                                <div id="error_end_datetime" class="error-message">
                                 </div>
                             </div>
                         </div>
@@ -188,7 +199,7 @@
                         </div>
                         <div class="date-time-container">
                             <div class="form-group">
-                                <label for="start-datetime-rehearsal">Дата и время начала репетиции:</label>
+                                <label for="start-datetime-rehearsal">Начало репетиции</label>
                                 <input type="datetime-local" id="start-datetime-rehearsal"
                                     name="start-datetime-rehearsal" required>
                                 <div id="error_start_datetime-rehearsal" class="error-message"
@@ -196,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="end-datetime-rehearsal">Дата и время окончания репетиции:</label>
+                                <label for="end-datetime-rehearsal">Окончание репетиции:</label>
                                 <input type="datetime-local" id="end-datetime-rehearsal" name="end-datetime-rehearsal"
                                     required>
                                 <div id="error_end_datetime-rehearsal" class="error-message"
@@ -204,10 +215,10 @@
                             </div>
                         </div>
                         <div class="form_group">
-                            <h2>Техническая поддержка</h2>
+                            <h2>Техническое обеспечение</h2>
                             <div class="custom-select" id="tech-support-select">
                                 <select class="hidden-select" id="technical_support" required>
-                                    <option value="">-- Выберите формат --</option>
+                                    <option value="">-- Выберите необходимое --</option>
                                     <option value="wardrobe">гардероб</option>
                                     <option value="sound_equipment">звуковое оборудование</option>
                                     <option value="stage_light">сценический свет</option>
@@ -215,11 +226,11 @@
                                     <option value="projection_equipment">проекционное оборудование</option>
                                 </select>
                                 <div class="select-styled">
-                                    <p>Выберите формат</p>
-                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <p>Выберите необходимое</p>
+                                    <svg class="select-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="select-options">
@@ -241,12 +252,12 @@
                             <h2>Выберите информацию об использовании фото и видеосъёмки</h2>
                             <div class="checkbox-dropdown">
                                 <div class="checkbox-dropdown-toggle">
-                                    <span class="selected-text">Выберите варианты</span>
+                                    <span class="selected-text">Выберите необходимое</span>
                                     <span class="selected-count"></span>
-                                    <svg class="checkbox-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="35"
-                                        height="35" viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    <svg class="ckbox-dropdown-arrow" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5L15 12L8 19" stroke="#000000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
                                 <ul class="checkbox-dropdown-menu">
@@ -287,8 +298,10 @@
 
                                 <label for="fileInput" class="upload-area" id="uploadArea">
                                     <span id="uploadText">Загрузить сценарий</span>
-                                    <svg class="file-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                                    <svg class="plus_svg" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14" />
                                     </svg>
                                 </label>
 
