@@ -265,6 +265,11 @@ input[type="datetime-local"] {
     position: relative;
     width: 100%;
 }
+.dropdown-checkbox {
+  display: flex;
+  align-items: center; /* Выравнивание по центру */
+  gap: 8px; /* Отступ между чекбоксом и текстом */
+}
 
 .checkbox-dropdown-toggle {
     padding: 15px 25px;
@@ -349,7 +354,15 @@ input[type="datetime-local"] {
     opacity: 0;
     cursor: pointer;
 }
-
+.dropdown-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1; /* Единый line-height */
+}
+input[type="checkbox"] {
+  box-sizing: border-box; /* Учитывает padding в ширину */
+}
 .checkbox-dropdown-item label {
     display: flex;
     align-items: center;
@@ -382,7 +395,6 @@ input[type="datetime-local"] {
     content: "";
     position: absolute;
     left: 9px;
-    top: 5px;
     width: 6px;
     height: 12px;
     border: solid #fff;
@@ -856,7 +868,7 @@ input[type="datetime-local"] {
     .form_group textarea,
     .select-styled,
     .checkbox-dropdown-toggle,
-    .upload-area, .form-block label, #tech-extra-fields h3 {
+    .upload-area, .form-block label, #tech-extra-fields h3, .checkbox-dropdown-item label {
         font-size: 20px;
        
     }
@@ -871,7 +883,7 @@ input[type="datetime-local"] {
     }
 
     .management .container {
-        padding: 25px 180px;
+        padding: 90px 180px 25px 180px;
     }
 
     .form .container {
@@ -888,7 +900,7 @@ input[type="datetime-local"] {
     .form_group textarea,
     .select-styled,
     .checkbox-dropdown-toggle,
-    .upload-area, .form-block label, #tech-extra-fields h3 {
+    .upload-area, .form-block label, #tech-extra-fields h3, .checkbox-dropdown-item label {
         font-size: 16px;
       
     }
@@ -921,10 +933,7 @@ input[type="datetime-local"] {
 
     .form_body {
         padding: 30px 40px;
-    }
-   
-    
-   
+    } 
 }
 
 
@@ -951,7 +960,7 @@ input[type="datetime-local"] {
     .form_group textarea,
     .select-styled,
     .checkbox-dropdown-toggle,
-    .upload-area, .form-block label, #tech-extra-fields h3 {
+    .upload-area, .form-block label, #tech-extra-fields h3, .checkbox-dropdown-item label {
         font-size: 14px;
      
     }
@@ -1108,8 +1117,9 @@ input[type="datetime-local"] {
     .form_group textarea {
         border-radius: 20px;
     }
-
-    
+    .form_group textarea {
+        padding: 11px 15px;
+    }
     .input[type="date"], input[type="datetime-local"] {
         padding: 10px 15px;
     }

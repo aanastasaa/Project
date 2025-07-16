@@ -18,3 +18,4 @@ function filterOrganizations(query) {
         org.style.display = name.includes(lowerQuery) ? '' : 'none';
     });
 }
+

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация мероприятия</title>
+    <link rel="stylesheet" href="form_event.css">
+    <link rel="stylesheet" href="header_footer.css">
+    <link rel="stylesheet" href="adaptive_header_footer.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="burger" id="burger">
+                <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m464.883 64.267h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                    <path
+                        d="m464.883 208.867h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z" />
+                    <path
+                        d="m464.883 353.467h-417.766c-25.98 0-47.117 21.137-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.012-21.137-47.149-47.117-47.149z" />
+                </svg>
+            </div>
+            <button class="login-button">Вход</button>
+            <nav class="menu" id="menu">
+                <div class="close">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 492 492"
+                        style="enable-background:new 0 0 492 492;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
+			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
+			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052
+			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116
+			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952
+			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
+			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <a href="#" class="menu-item">Главная</a>
+                <a href="#" class="menu-item">Новости и анонсы</a>
+                <img src="images/logo.png" alt="Логотип" class="logo">
+                <a href="#" class="menu-item">О нас</a>
+                <a href="#" class="menu-item">Контакты</a>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="поиск" class="search-input">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.66666 0C2.99267 0 0 2.99267 0 6.66666C0 10.3407 2.99267 13.3333 6.66666 13.3333C8.26434 13.3333 9.73158 12.766 10.8815 11.8242L14.862 15.8047C15.0292 15.9788 15.2775 16.049 15.5111 15.9881C15.7447 15.9272 15.9272 15.7447 15.9881 15.5111C16.049 15.2775 15.9788 15.0292 15.8047 14.862L11.8242 10.8815C12.766 9.73159 13.3333 8.26434 13.3333 6.66666C13.3333 2.99267 10.3407 0 6.66666 0ZM6.66666 1.33333C9.62008 1.33333 12 3.71325 12 6.66666C12 9.62008 9.62008 12 6.66666 12C3.71325 12 1.33333 9.62008 1.33333 6.66666C1.33333 3.71325 3.71325 1.33333 6.66666 1.33333Z"
+                        fill="#E65E26" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main">
+        <section class="management">
+            <div class="container">
+                <button class="button_next">
+                    <svg class="arrow_next" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 5L15 12L8 19" stroke="#E65E26" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span class="next-btn__text">Назад</span>
+                </button>
+            </div>
+        </section>
+        <section class="form">
+            <div class="container">
+                <div class="container-form">
+                    <div class="form_title">
+                        <h1 class="form_title_h1">РЕГИСТРАЦИЯ НА ПРОВЕДЕНИЕ МЕРОПРИЯТИЯ</h1>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_group">
+                            <h2>Название организации</h2>
+                            <input type="text" id="name_organization" name="name_organization" class="name_organization"
+                                placeholder="Название организации" required>
+                            <div id="error_name_organization" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div id="popup_name_organization" class="popup"></div>
+                        <div class="form_group">
+                            <h2>Номер телефона организации</h2>
+                            <input type="text" id="phone_number_organization" name="phone_number_organization"
+                                placeholder="Номер телефона организации" required>
+                            <div id="error_phone_organization" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Электронная почта</h2>
+                            <input type="text" id="email_organization" name="email_organization"
+                                placeholder="Электронная почта" required>
+                            <div id="error_email_organization" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Ответственное лицо</h2>
+                            <input type="text" id="responsible_person" name="responsible_person"
+                                placeholder="Ответсвенное лицо" required>
+                            <div id="error_responsible_person" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Номер тел. ответственного лица</h2>
+                            <input type="text" id="phone_responsible_person" name="phone_responsible_person"
+                                placeholder="Номер тел. ответственного лица" required>
+                            <div id="error_phone_responsible" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Реквизиты договора</h2>
+                            <input type="text" id="contract_details" name="contract_details"
+                                placeholder="Реквизиты договора" required>
+                            <div id="error_contract_details" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Выберите формат проведения мероприятия</h2>
+                            <div class="custom-select" id="event-type-select">
+                                <select class="hidden-select" id="event-type" required>
+                                    <option value="">Формат проведения мероприятия</option>
+                                    <option value="meeting">Совещание</option>
+                                    <option value="concert">Концерт</option>
+                                    <option value="seminar">Семинар</option>
+                                    <option value="conference">Конференция</option>
+                                    <option value="training">Тренинг</option>
+                                </select>
+                                <div class="select-styled">
+                                    <p>Формат проведения мероприятия</p>
+                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    </svg>
+                                </div>
+                                <ul class="select-options">
+                                    <li data-value="meeting">Совещание</li>
+                                    <li data-value="concert">Концерт</li>
+                                    <li data-value="seminar">Семинар</li>
+                                    <li data-value="conference">Конференция</li>
+                                    <li data-value="training">Тренинг</li>
+                                </ul>
+                            </div>
+                            <div id="error_event_type" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                        <div class="date-time-container">
+                            <div class="form-group">
+                                <label for="start-datetime">Дата и время начала мероприятия:</label>
+                                <input type="datetime-local" id="start-datetime" name="start-datetime" required>
+                                <div id="error_start_datetime" class="error-message" style="color: red; display: none;">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="end-datetime">Дата и время окончания мероприятия:</label>
+                                <input type="datetime-local" id="end-datetime" name="end-datetime" required>
+                                <div id="error_end_datetime" class="error-message" style="color: red; display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Наименование (тема) мероприятия</h2>
+                            <input type="text" id="name_event" name="name_event"
+                                placeholder="Наименование (тема) мероприятия" required>
+                            <div id="error_name_event" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Краткое описание мероприятия</h2>
+                            <textarea placeholder="Краткое описание мероприятия" id="myTextarea" required></textarea>
+                            <div id="error_description" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Количество участников</h2>
+                            <input type="text" id="namber_people" name="namber_people"
+                                placeholder="Количество участников" required>
+                            <div id="error_namber_people" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="date-time-container">
+                            <div class="form-group">
+                                <label for="start-datetime-rehearsal">Дата и время начала репетиции:</label>
+                                <input type="datetime-local" id="start-datetime-rehearsal"
+                                    name="start-datetime-rehearsal" required>
+                                <div id="error_start_datetime-rehearsal" class="error-message"
+                                    style="color: red; display: none;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="end-datetime-rehearsal">Дата и время окончания репетиции:</label>
+                                <input type="datetime-local" id="end-datetime-rehearsal" name="end-datetime-rehearsal"
+                                    required>
+                                <div id="error_end_datetime-rehearsal" class="error-message"
+                                    style="color: red; display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Техническая поддержка</h2>
+                            <div class="custom-select" id="tech-support-select">
+                                <select class="hidden-select" id="technical_support" required>
+                                    <option value="">-- Выберите формат --</option>
+                                    <option value="wardrobe">гардероб</option>
+                                    <option value="sound_equipment">звуковое оборудование</option>
+                                    <option value="stage_light">сценический свет</option>
+                                    <option value="scene">сцена</option>
+                                    <option value="projection_equipment">проекционное оборудование</option>
+                                </select>
+                                <div class="select-styled">
+                                    <p>Выберите формат</p>
+                                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    </svg>
+                                </div>
+                                <ul class="select-options">
+                                    <li data-value="wardrobe">гардероб</li>
+                                    <li data-value="sound_equipment">звуковое оборудование</li>
+                                    <li data-value="stage_light">сценический свет</li>
+                                    <li data-value="scene">сцена</li>
+                                    <li data-value="projection_equipment">проекционное оборудование</li>
+                                    <li data-value="laptop">ноутбук</li>
+                                    <li data-value="microphone">микрофон общий</li>
+                                    <li data-value="radio_microphone">радиомикрофон</li>
+                                    <li data-value="other">другое</li>
+                                </ul>
+                                <div id="tech-extra-fields" class="next-block"></div>
+                            </div>
+                            <div id="error_tech_support" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Выберите информацию об использовании фото и видеосъёмки</h2>
+                            <div class="checkbox-dropdown">
+                                <div class="checkbox-dropdown-toggle">
+                                    <span class="selected-text">Выберите варианты</span>
+                                    <span class="selected-count"></span>
+                                    <svg class="checkbox-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="35"
+                                        height="35" viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6" />
+                                    </svg>
+                                </div>
+                                <ul class="checkbox-dropdown-menu">
+                                    <li class="checkbox-dropdown-item">
+                                        <input type="checkbox" id="without_foto_video" name="information_foto_video"
+                                            value="without_foto_video">
+                                        <label for="without_foto_video">на мероприятии не предполагается фото и
+                                            видеосъёмка</label>
+                                    </li>
+                                    <li class="checkbox-dropdown-item">
+                                        <input type="checkbox" id="with_foto_video" name="information_foto_video"
+                                            value="with_foto_video">
+                                        <label for="with_foto_video">на мероприятии предполагается фото и
+                                            видеосъёмка</label>
+                                    </li>
+                                    <li class="checkbox-dropdown-item">
+                                        <input type="checkbox" id="media_invited" name="information_foto_video"
+                                            value="media_invited">
+                                        <label for="media_invited">на мероприятие приглашены СМИ</label>
+                                    </li>
+                                </ul>
+                                <div id="error_photo_video" class="error-message"></div>
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>В случае проведения мероприятия совместно с другими организациями, указать их
+                                наименования
+                            </h2>
+                            <textarea placeholder="Укажите организации" id="Textarea"></textarea>
+                            <div id="error_organizations" class="error-message" style="color: red; display: none;">
+                            </div>
+                        </div>
+                        <div class="form_group">
+                            <h2>Сценарий (план) проведения мероприятия</h2>
+                            <div class="file-upload-container">
+                                <input type="file" id="fileInput" class="file-input" accept=".doc,.docx,.pdf,.txt"
+                                    multiple>
+
+                                <label for="fileInput" class="upload-area" id="uploadArea">
+                                    <span id="uploadText">Загрузить сценарий</span>
+                                    <svg class="file-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                                    </svg>
+                                </label>
+
+                                <div class="status-text" id="statusText"></div>
+                                <div class="error-text" id="errorText">Максимальное количество файлов - 20!</div>
+
+                                <div class="files-list" id="filesList">
+                                    <!-- Список файлов будет добавляться здесь -->
+                                </div>
+                            </div>
+                            <div id="error_files" class="error-message" style="color: red; display: none;"></div>
+                        </div>
+                        <div class="button_send">
+                            <button class="send_form">
+                                <span class="send_form_text">Отправить заявку</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <div class="footer-nav-toggle">
+                    <h4 class="footer-main-text toggle-header">Навигация по сайту</h4>
+                    <ul class="footer-links toggle-content">
+                        <li><a href="#" class="footer-title-text">Главная</a></li>
+                        <li><a href="#" class="footer-title-text">О нас</a></li>
+                        <li><a href="#" class="footer-text">История</a></li>
+                        <li><a href="#" class="footer-text">Об учреждении</a></li>
+                        <li><a href="#" class="footer-text">Контакты</a></li>
+                        <li><a href="#" class="footer-text">Обращение директора</a></li>
+                        <li><a href="#" class="footer-text">Направления работы</a></li>
+                        <li><a href="#" class="footer-text">Учредители</a></li>
+                        <li><a href="#" class="footer-title-text">Информационная поддержка</a></li>
+                        <li><a href="#" class="footer-text">Новости</a></li>
+                        <li><a href="#" class="footer-text">Анонсы</a></li>
+                        <li><a href="#" class="footer-text">Предложить новость</a></li>
+                        <li><a href="#" class="footer-title-text">Образовательная деятельность</a></li>
+                        <li><a href="#" class="footer-text">Документы</a></li>
+                        <li><a href="#" class="footer-text">Записаться на обучение</a></li>
+                        <li><a href="#" class="footer-title-text">Нормативно-правовая база</a></li>
+                        <li><a href="#" class="footer-text">Документы учреждения</a></li>
+                        <li><a href="#" class="footer-text">Документы по конкурсу субсидий</a></li>
+                        <li><a href="#" class="footer-text">Региональные документы</a></li>
+                        <li><a href="#" class="footer-text">Федеральные документы</a></li>
+                        <li><a href="#" class="footer-text">Противодействие коррупции</a></li>
+                        <li><a href="#" class="footer-title-text">Реестр СОНКО</a></li>
+                        <li><a href="#" class="footer-text">Список организаций</a></li>
+                        <li><a href="#" class="footer-title-text">Ресурсная поддержка</a></li>
+                        <li><a href="#" class="footer-text">Подать заявку на проведение мероприятия</a></li>
+                        <li><a href="#" class="footer-text">Подать заявку на консультацию</a></li>
+                        <li><a href="#" class="footer-text">Библиотека учреждения</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="map-block">
+                    <h4 class="footer-main-text">Как добраться</h4>
+                    <div class="map-wrapper">
+                        <iframe
+                            src="https://yandex.ru/map-widget/v1/?um=constructor%3A72ad2f87419f88ef3a6b9f9af3b713fbc9261d4bbe44730c0f9f253156620144&amp;source=constructor"
+                            width="1200" height="400" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <div>
+                        <h4 class="footer-main-text">Режим работы</h4>
+                        <p class="footer-text">Пн–Чт: с 09:00 до 18:00</p>
+                        <p class="footer-text">Перерыв: с 13:00 до 14:00</p>
+                        <p class="footer-text">Пт: с 09:00 до 17:00</p>
+                        <p class="footer-text">Перерыв: с 13:00 до 14:00</p>
+                        <p class="footer-text">Сб, Вс: выходной</p>
+                    </div>
+                    <div class="center-block">
+                        <div>
+                            <h4 class="footer-main-text">Электронная почта</h4>
+                            <p class="footer-text"><a href="https://doo-ran.ru">https://doo-ran.ru</a><br>
+                                <a href="mailto:dooryazan@yandex.ru">dooryazan@yandex.ru</a>
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="footer-main-text margin-text">Об организации</h4>
+                            <p class="footer-text text-without-margin">Реквизиты организации</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="footer-main-text">Наши группы в соцсетях</h4>
+                        <div class="social-icons">
+                            <a href="#">
+                                <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_352_40)">
+                                        <path
+                                            d="M29.75 0H5.25C2.35051 0 0 2.35051 0 5.25V29.75C0 32.6495 2.35051 35 5.25 35H29.75C32.6495 35 35 32.6495 35 29.75V5.25C35 2.35051 32.6495 0 29.75 0Z"
+                                            fill="#22387D" />
+                                        <path
+                                            d="M18.7304 24.8144C19.0722 24.7461 19.6874 24.6094 19.6874 23.7891C19.6874 23.7891 19.6191 21.7383 20.5761 21.4648C21.5331 21.1914 22.7636 23.4473 24.0624 24.3359C25.0194 24.9512 25.7714 24.8828 25.7714 24.8828L29.2577 24.8144C29.2577 24.8144 31.0351 24.6777 30.2148 23.2422C30.1464 23.1055 29.5995 22.2168 27.5487 20.3711C25.4296 18.3203 25.7714 18.6621 28.3007 15.1758C29.873 13.0566 30.5566 11.7578 30.3515 11.2793C30.078 10.8008 28.9843 10.8691 28.9843 10.8691H25.0878C24.6777 10.8691 24.4726 10.9375 24.2675 11.2793C24.2675 11.2793 23.6523 12.9883 22.8319 14.3555C21.123 17.2949 20.4394 17.4316 20.0976 17.2266C19.4823 16.8848 19.6191 15.5859 19.6191 14.6973C19.6191 11.6211 20.0976 10.5273 18.7304 10.2539C17.8417 10.1172 14.6972 9.98046 13.7402 10.459C13.2616 10.7324 12.9882 11.2109 13.1933 11.2793C13.3984 11.2793 14.0136 11.3476 14.3554 11.7578C14.9023 12.6465 14.9706 16.8848 14.2187 17.2949C13.1933 18.0469 10.5956 13.0566 9.98039 11.416C9.84367 11.0059 9.63859 10.9375 9.16007 10.8008H5.40031C4.99015 10.8008 4.37492 10.8691 4.64835 11.6894C6.49406 15.5176 10.3222 24.8828 17.2265 24.8144H18.7304Z"
+                                            fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_352_40">
+                                            <rect width="35" height="35" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_352_35)">
+                                        <path
+                                            d="M29.75 0H5.25C2.35051 0 0 2.35051 0 5.25V29.75C0 32.6495 2.35051 35 5.25 35H29.75C32.6495 35 35 32.6495 35 29.75V5.25C35 2.35051 32.6495 0 29.75 0Z"
+                                            fill="#22387D" />
+                                        <path
+                                            d="M13.6035 27.6172C12.8516 27.6172 12.9199 27.3438 12.7148 26.6602L10.5273 19.4824L27.2754 9.63867"
+                                            fill="#C8DAEA" />
+                                        <path
+                                            d="M13.6035 27.6172C14.082 27.6172 14.3555 27.3438 14.6973 27.0703L17.7734 24.1309L13.9453 21.8066"
+                                            fill="#A9C9DD" />
+                                        <path
+                                            d="M13.9451 21.8062L23.1736 28.5738C24.1306 29.189 24.9509 28.8472 25.2244 27.6167L28.9841 9.98001C29.3259 8.4761 28.3689 7.79251 27.3435 8.27102L5.40016 16.7476C3.96462 17.2945 3.96462 18.1831 5.12673 18.5249L10.8006 20.3023L23.7888 12.0308C24.4041 11.689 24.9509 11.8257 24.5408 12.3042"
+                                            fill="#F6FBFE" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_352_35">
+                                            <rect width="35" height="35" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="forms.js"></script>
+<script src="header_footer.js"></script>
+
+</html>
